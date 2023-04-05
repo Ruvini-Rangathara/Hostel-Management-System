@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -51,7 +52,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnUpdate" layoutX="956.0" layoutY="622.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="111.0" style="-fx-background-color: #50C878;" text="Update/Delete" textFill="WHITE">
+      <JFXButton fx:id="btnEdit" layoutX="956.0" layoutY="622.0" onAction="#btnEditOnAction" prefHeight="30.0" prefWidth="111.0" style="-fx-background-color: #50C878;" text="Update/Delete" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -59,18 +60,30 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnSearch" layoutX="639.0" layoutY="98.0" onAction="#btnSearchOnAction" prefHeight="26.0" prefWidth="85.0" style="-fx-background-color: #989898;" text="  Search" textFill="WHITE">
+      <TextField fx:id="txtSearchBar" layoutX="248.0" layoutY="99.0" onAction="#txtSearchBarOnAction" onKeyTyped="#txtSearchBarOnKeyTyped" prefHeight="25.0" prefWidth="468.0" />
+      <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="683.0" layoutY="100.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/icon/search2.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btnRefresh" layoutX="1002.0" layoutY="26.0" onAction="#btnRefreshOnAction" onMouseExited="#btnRefreshOnMouseExited" onMouseMoved="#btnRefreshOnMouseMoved" prefHeight="33.0" prefWidth="40.0" text=" ">
          <graphic>
-            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="25.0" fitWidth="25.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asset/icon/searchIcon.png" />
+                  <Image url="@../asset/icon/updateIcon.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <ColorAdjust brightness="-1.0" />
+               </effect>
             </ImageView>
          </graphic>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <TextField fx:id="txtSearchBar" layoutX="242.0" layoutY="98.0" onAction="#txtSearchBarOnAction" onKeyTyped="#txtSearchBarOnKeyTyped" prefHeight="25.0" prefWidth="377.0" />
+      <Label fx:id="lblRefresh" layoutX="1043.0" layoutY="44.0" text="Refresh" />
    </children>
 </AnchorPane>

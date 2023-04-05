@@ -115,4 +115,45 @@ public class StudentServiceImpl implements StudentService {
             session.close();
         }
     }
+
+    @Override
+    public String getLastId() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        StudentDao studentDao= DaoFactory.getInstance().getDao(session, DaoType.STUDENT_DAO );
+        try{
+            String lastId = studentDao.getLastId();
+            transaction.commit();
+            return lastId;
+        }catch(Exception e){
+            transaction.rollback();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<StudentDto> studentSearchByText(String text) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        StudentDao studentDao= DaoFactory.getInstance().getDao(session, DaoType.STUDENT_DAO );
+        try{
+            List<Student> students = studentDao.studentSearchByText(text);
+            List<StudentDto> studentDtoList = new ArrayList<>();
+
+            for(Student student : students){
+                StudentDto studentDto = convertor.toStudentDto(student);
+                studentDtoList.add(studentDto);
+            }
+
+            transaction.commit();
+            return studentDtoList;
+        }catch(Exception e){
+            transaction.rollback();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
 }

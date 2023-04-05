@@ -46,4 +46,9 @@ public class UserDaoImpl implements UserDao {
         List<User> list= query.list();
         return list;
     }
+
+    @Override
+    public String getLastId() {
+        return null;
+    }
 }

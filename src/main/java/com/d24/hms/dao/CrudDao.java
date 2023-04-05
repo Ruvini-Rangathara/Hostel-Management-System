@@ -11,5 +11,6 @@ public interface CrudDao <T extends SuperEntity,ID extends Serializable> extends
     boolean delete(T entity);
     T search(ID id);
     List<T> getAll();
+    ID getLastId();
 
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -10,8 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #4E6E81;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.popupWindows.PopupStudentEditFormController">
+<AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #4E6E81;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.popupWindows.PopupStudentEditFormController">
    <children>
       <ImageView fitHeight="500.0" fitWidth="559.0" opacity="0.6" pickOnBounds="true">
          <image>
@@ -23,7 +23,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtName" layoutX="190.0" layoutY="218.0" onAction="#txtNameOnAction" prefHeight="25.0" prefWidth="312.0" promptText="S.A. Ruvini Rangathara">
+      <TextField fx:id="txtName" focusTraversable="false" layoutX="190.0" layoutY="218.0" onAction="#txtNameOnAction" prefHeight="25.0" prefWidth="312.0" promptText="S.A. Ruvini Rangathara">
          <font>
             <Font size="14.0" />
          </font>
@@ -33,7 +33,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtAddress" layoutX="190.0" layoutY="265.0" onAction="#txtAddressOnAction" prefHeight="25.0" prefWidth="312.0" promptText="No : 48, Miriswaththa, Mahavila, Panadura">
+      <TextField fx:id="txtAddress" focusTraversable="false" layoutX="190.0" layoutY="265.0" onAction="#txtAddressOnAction" prefHeight="25.0" prefWidth="312.0" promptText="No : 48, Miriswaththa, Mahavila, Panadura">
          <font>
             <Font size="14.0" />
          </font>
@@ -43,7 +43,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtContactNo" layoutX="190.0" layoutY="311.0" onAction="#txtContactNoOnAction" prefHeight="25.0" prefWidth="312.0" promptText="0786628489">
+      <TextField fx:id="txtContactNo" focusTraversable="false" layoutX="190.0" layoutY="311.0" onAction="#txtContactNoOnAction" prefHeight="25.0" prefWidth="312.0" promptText="0786628489">
          <font>
             <Font size="14.0" />
          </font>
@@ -53,13 +53,13 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dteDate" layoutX="190.0" layoutY="357.0" prefHeight="25.0" prefWidth="312.0" promptText="2000/09/25" />
+      <DatePicker fx:id="dteDate" focusTraversable="false" layoutX="190.0" layoutY="356.0" prefHeight="30.0" prefWidth="312.0" promptText="2000/09/25" />
       <Label layoutX="64.0" layoutY="404.0" prefHeight="20.0" prefWidth="114.0" text="Gender              :">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cmbGender" layoutX="191.0" layoutY="402.0" prefHeight="25.0" prefWidth="312.0" />
+      <ComboBox fx:id="cmbGender" focusTraversable="false" layoutX="191.0" layoutY="402.0" prefHeight="30.0" prefWidth="312.0" />
       <ImageView fitHeight="130.0" fitWidth="139.0" layoutX="217.0" layoutY="24.0" pickOnBounds="true">
          <image>
             <Image url="@../../asset/image/student1.png" />
@@ -69,13 +69,16 @@
          <font>
             <Font size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <Label layoutX="64.0" layoutY="174.0" prefHeight="20.0" prefWidth="114.0" text="Student ID         : ">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtId" layoutX="190.0" layoutY="170.0" onAction="#txtIdOnAction" prefHeight="25.0" prefWidth="312.0" promptText="S0001">
+      <TextField fx:id="txtId" focusTraversable="false" layoutX="190.0" layoutY="170.0" onAction="#txtIdOnAction" prefHeight="25.0" prefWidth="312.0" promptText="S0001">
          <font>
             <Font size="14.0" />
          </font>
@@ -84,6 +87,9 @@
          <font>
             <Font size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
    </children>
 </AnchorPane>

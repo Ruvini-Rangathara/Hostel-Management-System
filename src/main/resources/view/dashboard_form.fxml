@@ -115,7 +115,7 @@
       </Pane>
       <AnchorPane fx:id="pane2" layoutX="240.0" prefHeight="696.0" prefWidth="1122.0">
          <children>
-            <Label fx:id="lblDate" alignment="CENTER" layoutX="791.0" layoutY="16.0" opacity="0.5" prefHeight="30.0" prefWidth="301.0" style="-fx-background-color: #7F7F7F; -fx-background-radius: 10px;" text="2023 - 12-22" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="lblDate" alignment="CENTER" layoutX="766.0" layoutY="16.0" opacity="0.5" prefHeight="30.0" prefWidth="326.0" style="-fx-background-color: #7F7F7F; -fx-background-radius: 10px;" text="2023 - 12-22" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>

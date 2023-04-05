@@ -6,18 +6,26 @@ import com.d24.hms.service.ServiceFactory;
 import com.d24.hms.service.ServiceType;
 import com.d24.hms.service.custom.StudentService;
 import com.d24.hms.tm.StudentTM;
+import com.d24.hms.util.Navigation;
+import com.d24.hms.util.Routes;
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class PopupStudentEditFormController {
+public class PopupStudentEditFormController implements Initializable {
 
+    public AnchorPane pane;
     @FXML
     private TextField txtName;
 
@@ -31,7 +39,7 @@ public class PopupStudentEditFormController {
     private DatePicker dteDate;
 
     @FXML
-    private ComboBox<?> cmbGender;
+    private ComboBox<String> cmbGender;
 
     @FXML
     private JFXButton btnDelete;
@@ -44,10 +52,20 @@ public class PopupStudentEditFormController {
 
 
     private StudentFormController studentFormController;
-    private com.d24.hms.tm.StudentTM StudentTM;
+    private com.d24.hms.tm.StudentTM studentTM;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtId.setDisable(true);
+
+        ObservableList<String> gender = FXCollections.observableArrayList();
+        gender.add("Male");
+        gender.add("Female");
+        cmbGender.setItems(gender);
+    }
 
     public void init(StudentTM studentTM, StudentFormController studentFormController){
-        this.StudentTM=studentTM;
+        this.studentTM=studentTM;
         this.studentFormController =studentFormController;
         fillAllFields(studentTM);
     }
@@ -56,25 +74,32 @@ public class PopupStudentEditFormController {
         txtName.setText(studentTM.getName());
         txtAddress.setText(studentTM.getAddress());
         txtContactNo.setText(studentTM.getContact());
-        dteDate.setPromptText(String.valueOf(dteDate.getValue()));
+        dteDate.setPromptText(String.valueOf(studentTM.getDate()));
         cmbGender.setPromptText(studentTM.getGender());
     }
 
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {
+    void btnDeleteOnAction(ActionEvent event) throws IOException {
+        StudentService studentService = ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
+        Optional<ButtonType> choose = new Alert(Alert.AlertType.WARNING,"Are you sure?",ButtonType.OK,ButtonType.CANCEL).showAndWait();
+        if(choose.get()==ButtonType.OK){
+            if(studentService.delete(getStudentDto())){
+                new Alert(Alert.AlertType.CONFIRMATION,"Deleted!").show();
+                Navigation.navigate(Routes.POPUP_STUDENT_EDIT_FORM,pane);
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
+            }
+        }
 
     }
 
-    @FXML
-    void btnUpdateOnAction(ActionEvent event) {
-        StudentService studentService = ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
+    private StudentDto getStudentDto(){
         LocalDate date;
         if(dteDate.getValue()==null){
             date= LocalDate.parse(dteDate.getPromptText());
         }else{
             date=dteDate.getValue();
         }
-
         StudentDto studentDto = new StudentDto(
                 txtId.getText(),
                 txtName.getText(),
@@ -83,8 +108,17 @@ public class PopupStudentEditFormController {
                 date,
                 String.valueOf(cmbGender.getValue())
         );
-        if (studentService.update(studentDto)){
+        return studentDto;
+    }
+
+
+    @FXML
+    void btnUpdateOnAction(ActionEvent event) throws IOException {
+        StudentService studentService = ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
+
+        if (studentService.update(getStudentDto())){
             new Alert(Alert.AlertType.CONFIRMATION,"Updated!").show();
+            Navigation.navigate(Routes.POPUP_STUDENT_EDIT_FORM,pane);
         }else{
             new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
         }
@@ -92,12 +126,11 @@ public class PopupStudentEditFormController {
 
     @FXML
     void txtAddressOnAction(ActionEvent event) {
-
+        txtContactNo.requestFocus();
     }
 
     @FXML
     void txtContactNoOnAction(ActionEvent event) {
-
     }
 
     @FXML
@@ -107,7 +140,7 @@ public class PopupStudentEditFormController {
 
     @FXML
     void txtNameOnAction(ActionEvent event) {
-
+        txtAddress.requestFocus();
     }
 
 }

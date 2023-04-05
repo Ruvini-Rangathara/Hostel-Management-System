@@ -1,7 +1,6 @@
 package com.d24.hms.dao.custom.impl;
 
 import com.d24.hms.dao.custom.StudentDao;
-import com.d24.hms.entity.Reservation;
 import com.d24.hms.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -44,6 +43,22 @@ public class StudentDaoImpl implements StudentDao {
         String hql = "FROM student s ORDER BY s.student_id DESC";
         Query query = session.createQuery(hql);
         List<Student> list= query.list();
+        return list;
+    }
+
+    @Override
+    public String getLastId() {
+        String hql = "SELECT student_id FROM student ORDER BY student_id DESC";
+        Query query = session.createQuery(hql);
+        List<String> list = query.list();
+        return list.get(0);
+    }
+
+    @Override
+    public List<Student> studentSearchByText(String text) {
+        String hql = "FROM student WHERE student_id LIKE '"+text+"%' OR  name LIKE '"+text+"%' OR address LIKE '"+text+"%' OR contact LIKE '"+text+"%'";
+        Query query = session.createQuery(hql);
+        List<Student> list = query.list();
         return list;
     }
 }

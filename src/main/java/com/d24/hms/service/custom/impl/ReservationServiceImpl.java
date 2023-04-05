@@ -118,4 +118,9 @@ public class ReservationServiceImpl implements ReservationService {
             session.close();
         }
     }
+
+    @Override
+    public String getLastId() {
+        return null;
+    }
 }

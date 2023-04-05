@@ -46,4 +46,9 @@ public class ReservationDaoImpl implements ReservationDao {
         List<Reservation> list= query.list();
         return list;
     }
+
+    @Override
+    public String getLastId() {
+        return null;
+    }
 }

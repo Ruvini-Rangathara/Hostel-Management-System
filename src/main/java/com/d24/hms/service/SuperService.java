@@ -11,4 +11,5 @@ public interface SuperService <T extends SuperDto,ID extends Serializable> {
     boolean delete(T dto);
     T search(ID id);
     List<T> getAll();
+    ID getLastId();
 }

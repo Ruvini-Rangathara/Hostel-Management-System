@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +14,7 @@ public class StudentTM {
     private String name;
     private String address;
     private String contact;
-    private Date date;
+    private LocalDate date;
     private String gender;
 
 }

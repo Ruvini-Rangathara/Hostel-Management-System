@@ -1,11 +1,11 @@
 package com.d24.hms.controller.popupWindows;
 
-import com.d24.hms.controller.StudentFormController;
 import com.d24.hms.dto.StudentDto;
 import com.d24.hms.service.ServiceFactory;
 import com.d24.hms.service.ServiceType;
 import com.d24.hms.service.custom.StudentService;
-import com.d24.hms.tm.StudentTM;
+import com.d24.hms.util.Navigation;
+import com.d24.hms.util.Routes;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,12 +13,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class PopupStudentSaveFormController implements Initializable {
 
+    public AnchorPane pane;
     @FXML
     private Label lblStudentId;
 
@@ -35,11 +39,10 @@ public class PopupStudentSaveFormController implements Initializable {
     private DatePicker dteDate;
 
     @FXML
-    private ComboBox<?> cmbGender;
+    private ComboBox<String> cmbGender;
 
     @FXML
     private JFXButton btnRegister;
-
 
 
     @Override
@@ -47,11 +50,29 @@ public class PopupStudentSaveFormController implements Initializable {
         ObservableList<String> gender = FXCollections.observableArrayList();
         gender.add("Male");
         gender.add("Female");
+        cmbGender.setItems(gender);
+
+        setId();
+
+    }
+
+    private void setId() {
+        StudentService studentService = ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
+        String lastStudentId = studentService.getLastId();
+        if (lastStudentId == null) {
+            lblStudentId.setText("S0001");
+        } else {
+            String[] split = lastStudentId.split("[S]");
+            int lastDigits = Integer.parseInt(split[1]);
+            lastDigits++;
+            String newStudentId = String.format("S%04d", lastDigits);
+            lblStudentId.setText(newStudentId);
+        }
     }
 
 
     @FXML
-    void btnRegisterOnAction(ActionEvent event) {
+    void btnRegisterOnAction(ActionEvent event) throws IOException {
         StudentService studentService = ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
         StudentDto studentDto = new StudentDto(
                 lblStudentId.getText(),
@@ -61,11 +82,13 @@ public class PopupStudentSaveFormController implements Initializable {
                 dteDate.getValue(),
                 String.valueOf(cmbGender.getValue())
         );
-        if (studentService.save(studentDto)){
-            new Alert(Alert.AlertType.CONFIRMATION,"Saved!").show();
-        }else{
-            new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
+        if (studentService.save(studentDto)) {
+            Optional<ButtonType> choose = new Alert(Alert.AlertType.CONFIRMATION, "Student Added Successfully!", ButtonType.OK, ButtonType.CANCEL).showAndWait();
+            if (choose.get() == ButtonType.OK) {
+                Navigation.navigate(Routes.POPUP_STUDENT_SAVE_FORM, pane);
+            }
         }
+
 
     }
 

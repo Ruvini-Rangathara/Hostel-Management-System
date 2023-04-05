@@ -2,11 +2,12 @@ package com.d24.hms.controller;
 
 
 import com.d24.hms.controller.popupWindows.PopupStudentEditFormController;
-import com.d24.hms.controller.popupWindows.PopupStudentSaveFormController;
 import com.d24.hms.service.ServiceFactory;
 import com.d24.hms.service.ServiceType;
 import com.d24.hms.service.custom.StudentService;
 import com.d24.hms.tm.StudentTM;
+import com.d24.hms.util.Navigation;
+import com.d24.hms.util.Routes;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,11 +17,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,11 +31,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class StudentFormController implements Initializable {
 
+    public JFXButton btnRefresh;
+    public Label lblRefresh;
     @FXML
     private AnchorPane pane2;
 
@@ -61,13 +67,7 @@ public class StudentFormController implements Initializable {
     private JFXButton btnAdd;
 
     @FXML
-    private JFXButton btnUpdate;
-
-    @FXML
-    private JFXButton btnDelete;
-
-    @FXML
-    private JFXButton btnSearch;
+    private JFXButton btnEdit;
 
     @FXML
     private TextField txtSearchBar;
@@ -92,22 +92,16 @@ public class StudentFormController implements Initializable {
         tblStudent.setItems(studentTMS);
 
 
-//        txtSearchMember.textProperty().addListener((observableValue, pre, curr) ->{
-//            if (!Objects.equals(pre, curr)){
-//                tblMembers.getItems().clear();
-//                List<MemberTM> searchResult = ManageMemberModel.searchMembers(curr).stream().map(member -> new MemberTM(member.getId(), member.getName(), member.getAddress(), member.getContact())).collect(Collectors.toList());
-//                tblMembers.setItems(FXCollections.observableArrayList(searchResult));
-//            }
-//
-//        } );
-//
-//        tblMembers.getSelectionModel().selectedItemProperty().addListener((observableValue, pre, curr) -> {
-//            if (curr!=pre || curr!=null){
-//                btnUpdateDelete.setDisable(false);
-//                btnIssueList.setDisable(false);
-//            }
-//
-//        });
+        txtSearchBar.textProperty().addListener((observableValue, pre, curr) ->{
+            if (!Objects.equals(pre, curr)){
+                List<StudentTM> searchResult = studentService.studentSearchByText(curr).stream().map(student -> new StudentTM(student.getStudent_id(), student.getName(), student.getAddress(), student.getContact(), student.getDate(), student.getGender())).collect(Collectors.toList());
+                if(searchResult!=null){
+                    tblStudent.getItems().clear();
+                    tblStudent.setItems(FXCollections.observableArrayList(searchResult));
+                }
+            }
+
+        } );
 
     }
 
@@ -116,8 +110,6 @@ public class StudentFormController implements Initializable {
         URL resource = this.getClass().getResource("/view/popupWindows/popup_student_save_form.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(resource);
         Parent load = fxmlLoader.load();
-        //PopupStudentSaveFormController controller = fxmlLoader.getController();
-        //controller.init(tblStudent.getSelectionModel().getSelectedItem(),this);
         Stage stage = new Stage();
         stage.setTitle("Save Student Details");
         stage.setScene(new Scene(load));
@@ -126,13 +118,9 @@ public class StudentFormController implements Initializable {
         stage.show();
     }
 
-    @FXML
-    void btnSearchOnAction(ActionEvent event) {
-
-    }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) throws IOException {
+    void btnEditOnAction(ActionEvent event) throws IOException {
         URL resource = this.getClass().getResource("/view/popupWindows/popup_student_edit_form.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(resource);
         Parent load = fxmlLoader.load();
@@ -154,6 +142,18 @@ public class StudentFormController implements Initializable {
     @FXML
     void txtSearchBarOnKeyTyped(KeyEvent event) {
 
+    }
+
+    public void btnRefreshOnAction(ActionEvent actionEvent) throws IOException {
+        Navigation.navigate(Routes.ROOM_FORM,pane2);
+    }
+
+    public void btnRefreshOnMouseExited(MouseEvent mouseEvent) {
+        lblRefresh.setVisible(false);
+    }
+
+    public void btnRefreshOnMouseMoved(MouseEvent mouseEvent) {
+        lblRefresh.setVisible(true);
     }
 
 }

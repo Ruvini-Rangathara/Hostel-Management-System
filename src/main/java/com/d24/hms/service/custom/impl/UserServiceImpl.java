@@ -115,4 +115,9 @@ public class UserServiceImpl implements UserService {
             session.close();
         }
     }
+
+    @Override
+    public String getLastId() {
+        return null;
+    }
 }

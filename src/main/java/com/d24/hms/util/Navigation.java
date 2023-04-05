@@ -46,12 +46,32 @@ public class Navigation {
                 initUI("user_form.fxml");
                 break;
 
+            case POPUP_STUDENT_SAVE_FORM:
+                initUI2("popup_student_save_form.fxml");
+                break;
+
+            case POPUP_STUDENT_EDIT_FORM:
+                initUI2("popup_student_edit_form.fxml");
+                break;
+
+            case POPUP_ROOM_SAVE_FORM:
+                initUI2("popup_room_save_form.fxml");
+                break;
+
+            case POPUP_ROOM_EDIT_FORM:
+                initUI2("popup_room_edit_form.fxml");
+                break;
+
+
             default:
                 new Alert(Alert.AlertType.ERROR, "UI Not Found!").show();
         }
     }
     public static void initUI(String location) throws IOException {
         Navigation.pane.getChildren().add(FXMLLoader.load(Navigation.class.getResource("/view/" + location)));
+    }
 
+    public static void initUI2(String location) throws IOException {
+        Navigation.pane.getChildren().add(FXMLLoader.load(Navigation.class.getResource("/view/popupWindows/" + location)));
     }
 }

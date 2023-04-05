@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #4E6E81;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.popupWindows.PopupStudentSaveFormController">
+<AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #4E6E81;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.popupWindows.PopupStudentSaveFormController">
    <children>
       <ImageView fitHeight="500.0" fitWidth="559.0" opacity="0.6" pickOnBounds="true">
          <image>
@@ -59,13 +60,13 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dteDate" focusTraversable="false" layoutX="190.0" layoutY="340.0" prefHeight="25.0" prefWidth="312.0" promptText="2000/09/25" />
+      <DatePicker fx:id="dteDate" focusTraversable="false" layoutX="190.0" layoutY="340.0" prefHeight="30.0" prefWidth="312.0" promptText="2000/09/25" />
       <Label layoutX="64.0" layoutY="389.0" prefHeight="20.0" prefWidth="114.0" text="Gender              :">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cmbGender" focusTraversable="false" layoutX="191.0" layoutY="387.0" prefHeight="25.0" prefWidth="312.0" />
+      <ComboBox fx:id="cmbGender" focusTraversable="false" layoutX="191.0" layoutY="387.0" prefHeight="30.0" prefWidth="312.0" />
       <ImageView fitHeight="130.0" fitWidth="139.0" layoutX="217.0" layoutY="56.0" pickOnBounds="true">
          <image>
             <Image url="@../../asset/image/student1.png" />
@@ -74,6 +75,9 @@
          <font>
             <Font size="14.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
    </children>
 </AnchorPane>

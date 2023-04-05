@@ -4,6 +4,7 @@ import com.d24.hms.dao.DaoFactory;
 import com.d24.hms.dao.DaoType;
 import com.d24.hms.dao.custom.StudentDao;
 import com.d24.hms.dto.StudentDto;
+import com.d24.hms.entity.Room;
 import com.d24.hms.entity.Student;
 import com.d24.hms.util.FactoryConfiguration;
 import javafx.application.Application;
@@ -60,6 +61,33 @@ public class AppInitializer extends Application {
             transaction.rollback();
         }finally {
             session.close();
+        }
+
+
+        Session session1 = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction1 = session1.beginTransaction();
+        try{
+
+            Room room1 = new Room();
+            room1.setRoom_type_id("RM-00001");
+            room1.setType("AC");
+            room1.setKey_money(2000.00);
+            room1.setQty(10);
+            session1.save(room1);
+
+            Room room2 = new Room();
+            room2.setRoom_type_id("RM-00002");
+            room2.setType("AC/Food");
+            room2.setKey_money(3000.00);
+            room2.setQty(12);
+            session1.save(room2);
+
+            transaction1.commit();
+
+        }catch(Exception e){
+            transaction1.rollback();
+        }finally {
+            session1.close();
         }
 
         launch();

@@ -4,8 +4,11 @@ import com.d24.hms.dao.DaoFactory;
 import com.d24.hms.dao.DaoType;
 import com.d24.hms.dao.custom.ReservationDao;
 import com.d24.hms.dao.custom.RoomDao;
+import com.d24.hms.dao.custom.StudentDao;
 import com.d24.hms.dto.RoomDto;
+import com.d24.hms.dto.StudentDto;
 import com.d24.hms.entity.Room;
+import com.d24.hms.entity.Student;
 import com.d24.hms.service.custom.RoomService;
 import com.d24.hms.service.util.Convertor;
 import com.d24.hms.util.FactoryConfiguration;
@@ -117,6 +120,47 @@ public class RoomServiceImpl implements RoomService {
 
             transaction.commit();
             return dtoList;
+        }catch(Exception e){
+            transaction.rollback();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public String getLastId() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        RoomDao roomDao= DaoFactory.getInstance().getDao(session, DaoType.ROOM_DAO );
+        try{
+            String lastId = roomDao.getLastId();
+            transaction.commit();
+            return lastId;
+        }catch(Exception e){
+            transaction.rollback();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<RoomDto> roomSearchByText(String text) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        RoomDao roomDao= DaoFactory.getInstance().getDao(session, DaoType.ROOM_DAO );
+        try{
+            List<Room> rooms = roomDao.roomSearchByText(text);
+            List<RoomDto> roomDtoList = new ArrayList<>();
+
+            for(Room room : rooms){
+                RoomDto roomDto = convertor.toRoomDto(room);
+                roomDtoList.add(roomDto);
+            }
+
+            transaction.commit();
+            return roomDtoList;
         }catch(Exception e){
             transaction.rollback();
             return null;
