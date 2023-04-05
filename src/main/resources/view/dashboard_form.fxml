@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="696.0" prefWidth="1362.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.DashboardFormController">
+   <children>
+      <ImageView fitHeight="696.0" fitWidth="1362.0" layoutX="-1.0" opacity="0.6" pickOnBounds="true">
+         <image>
+            <Image url="@../asset/image/bg1.jpg" />
+         </image>
+      </ImageView>
+      <Pane opacity="0.9" prefHeight="696.0" prefWidth="240.0" style="-fx-background-color: E1E2E6;">
+         <children>
+            <ImageView fitHeight="138.0" fitWidth="194.0" layoutX="48.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/icon/icon1.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="btnRoom" focusTraversable="false" layoutY="300.0" onAction="#btnRoomOnAction" opacity="0.9" prefHeight="44.0" prefWidth="240.0" text="   Rooms">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="47.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/icon/roomIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label layoutX="23.0" layoutY="164.0" text="D24 Hostel - Colombo" textFill="#2160c6">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnStudent" focusTraversable="false" layoutY="357.0" onAction="#btnStudentOnAction" opacity="0.9" prefHeight="44.0" prefWidth="240.0" text="   Students">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="47.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/icon/studentIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnReservation" focusTraversable="false" layoutY="414.0" onAction="#btnReservationOnAction" opacity="0.9" prefHeight="44.0" prefWidth="240.0" text="   Reservations">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="47.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/icon/reservationIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnSettings" focusTraversable="false" layoutY="471.0" onAction="#btnSettingsOnAction" opacity="0.9" prefHeight="44.0" prefWidth="240.0" text="   Settings">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="47.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/icon/settingIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnLogOut" focusTraversable="false" layoutY="638.0" onAction="#btnLogOutOnAction" opacity="0.9" prefHeight="44.0" prefWidth="240.0" text="   LogOut">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asset/icon/logoutIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnDashboard" focusTraversable="false" layoutY="243.0" onAction="#btnDashboardOnAction" opacity="0.9" prefHeight="58.0" prefWidth="240.0" text="Dashboard" textFill="#1f3590">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </Pane>
+      <AnchorPane fx:id="pane2" layoutX="240.0" prefHeight="696.0" prefWidth="1122.0">
+         <children>
+            <Label fx:id="lblDate" alignment="CENTER" layoutX="791.0" layoutY="16.0" opacity="0.5" prefHeight="30.0" prefWidth="301.0" style="-fx-background-color: #7F7F7F; -fx-background-radius: 10px;" text="2023 - 12-22" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>

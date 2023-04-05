@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #4E6E81;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.popupWindows.PopupStudentSaveFormController">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="559.0" opacity="0.6" pickOnBounds="true">
+         <image>
+            <Image url="@../../asset/image/bg1.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="350.0" layoutY="13.0" prefHeight="20.0" prefWidth="121.0" text="Student ID         : ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblStudentId" layoutX="462.0" layoutY="13.0" prefHeight="20.0" prefWidth="90.0" text="S0001">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="64.0" layoutY="205.0" prefHeight="20.0" prefWidth="114.0" text="Student Name   : ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtName" focusTraversable="false" layoutX="190.0" layoutY="201.0" onAction="#txtNameOnAction" prefHeight="25.0" prefWidth="312.0" promptText="S.A. Ruvini Rangathara">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Label layoutX="64.0" layoutY="250.0" prefHeight="20.0" prefWidth="114.0" text="Address              :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtAddress" focusTraversable="false" layoutX="190.0" layoutY="248.0" onAction="#txtAddressOnAction" prefHeight="25.0" prefWidth="312.0" promptText="No : 48, Miriswaththa, Mahavila, Panadura">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Label layoutX="64.0" layoutY="295.0" prefHeight="20.0" prefWidth="114.0" text="Contact No        :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtContactNo" focusTraversable="false" layoutX="190.0" layoutY="294.0" onAction="#txtContactNoOnAction" prefHeight="25.0" prefWidth="312.0" promptText="0786628489">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Label layoutX="64.0" layoutY="342.0" prefHeight="20.0" prefWidth="114.0" text="Date Of Birth     :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="dteDate" focusTraversable="false" layoutX="190.0" layoutY="340.0" prefHeight="25.0" prefWidth="312.0" promptText="2000/09/25" />
+      <Label layoutX="64.0" layoutY="389.0" prefHeight="20.0" prefWidth="114.0" text="Gender              :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cmbGender" focusTraversable="false" layoutX="191.0" layoutY="387.0" prefHeight="25.0" prefWidth="312.0" />
+      <ImageView fitHeight="130.0" fitWidth="139.0" layoutX="217.0" layoutY="56.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../asset/image/student1.png" />
+         </image></ImageView>
+      <JFXButton fx:id="btnRegister" layoutX="399.0" layoutY="444.0" onAction="#btnRegisterOnAction" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: #19376D;" text="Register" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

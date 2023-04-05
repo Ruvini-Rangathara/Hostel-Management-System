@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane2" prefHeight="696.0" prefWidth="1122.0" style="-fx-background-color: E1E2E6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.StudentFormController">
+   <children>
+      <ImageView fitHeight="696.0" fitWidth="1122.0" opacity="0.6" pickOnBounds="true">
+         <image>
+            <Image url="@../asset/image/bg1.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblStudent" focusTraversable="false" layoutX="72.0" layoutY="146.0" prefHeight="507.0" prefWidth="832.0">
+        <columns>
+          <TableColumn fx:id="colStudentId" prefWidth="69.0" text="Student ID" />
+          <TableColumn fx:id="colName" prefWidth="255.0" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="229.0" text="Address" />
+            <TableColumn fx:id="colContactNo" prefWidth="105.0" text="Contact No" />
+            <TableColumn fx:id="colDob" prefWidth="94.0" text="Date Of Birth" />
+            <TableColumn fx:id="colGender" prefWidth="79.0" text="Gender" />
+        </columns>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TableView>
+      <Label layoutX="412.0" layoutY="10.0" opacity="0.8" text="Manage Students" textFill="#1f3590">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnAdd" layoutX="956.0" layoutY="572.0" onAction="#btnAddOnAction" prefHeight="30.0" prefWidth="111.0" style="-fx-background-color: #2160c6;" text="  Add" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/icon/addIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnUpdate" layoutX="956.0" layoutY="622.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="111.0" style="-fx-background-color: #50C878;" text="Update/Delete" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnSearch" layoutX="639.0" layoutY="98.0" onAction="#btnSearchOnAction" prefHeight="26.0" prefWidth="85.0" style="-fx-background-color: #989898;" text="  Search" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/icon/searchIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <TextField fx:id="txtSearchBar" layoutX="242.0" layoutY="98.0" onAction="#txtSearchBarOnAction" onKeyTyped="#txtSearchBarOnKeyTyped" prefHeight="25.0" prefWidth="377.0" />
+   </children>
+</AnchorPane>

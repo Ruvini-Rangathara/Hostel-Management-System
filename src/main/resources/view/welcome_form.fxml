@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="696.0" prefWidth="1362.0" style="-fx-background-color: E1E2E6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.WelcomeFormController">
+   <children>
+      <ImageView fitHeight="696.0" fitWidth="1362.0" opacity="0.6" pickOnBounds="true">
+         <image>
+            <Image url="@../asset/image/bg1.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="164.0" fitWidth="210.0" layoutX="582.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/icon/icon1.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="425.0" layoutY="326.0" prefHeight="164.0" prefWidth="486.0" text="D24 Hostel Management System" textAlignment="CENTER" textFill="#2160c6" wrapText="true">
+         <font>
+            <Font size="50.0" />
+         </font>
+      </Label>
+      <Label layoutX="498.0" layoutY="640.0" prefHeight="51.0" prefWidth="327.0" text="                    Privacy Policy  |  License Agrement  |                   Terms Of Service 2023. RuviniRangathara. All Rights Reserved." textAlignment="CENTER" wrapText="true" />
+      <Rectangle fx:id="rctContainer" arcHeight="5.0" arcWidth="5.0" fill="#7f7f7f" height="8.0" layoutX="422.0" layoutY="590.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="487.0" />
+      <Rectangle fx:id="rctLoading" arcHeight="5.0" arcWidth="5.0" fill="#6598e4" height="8.0" layoutX="422.0" layoutY="590.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
+      <Label fx:id="lblLoading" alignment="CENTER" layoutX="546.0" layoutY="562.0" prefHeight="17.0" prefWidth="254.0" text="Welcome to D24 HostelManagement System" />
+   </children>
+</AnchorPane>

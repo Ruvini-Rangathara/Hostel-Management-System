@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="696.0" prefWidth="1362.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.LoginFormController">
+   <children>
+      <ImageView fitHeight="696.0" fitWidth="1362.0" opacity="0.6" pickOnBounds="true">
+         <image>
+            <Image url="@../asset/image/bg1.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblDate" accessibleRole="HYPERLINK" alignment="CENTER" layoutX="260.0" layoutY="534.0" prefHeight="45.0" prefWidth="258.0" text="2023-March-30" textFill="#a1a1a1">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="452.0" fitWidth="463.0" layoutX="155.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asset/image/hostel3.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="821.0" layoutY="79.0" opacity="0.9" prefHeight="552.0" prefWidth="463.0" style="-fx-background-color: E1E2E6; -fx-background-radius: 10px;">
+         <children>
+            <ImageView fitHeight="112.0" fitWidth="122.0" layoutX="170.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/icon/icon1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Separator layoutX="740.0" layoutY="74.0" opacity="0.2" orientation="VERTICAL" prefHeight="563.0" prefWidth="0.0" style="-fx-background-color: #8a8888;" />
+      <Separator layoutX="875.0" layoutY="236.0" opacity="0.7" prefHeight="0.0" prefWidth="135.0" style="-fx-background-color: #827777;" />
+      <Label layoutX="1025.0" layoutY="224.0" opacity="0.7" prefHeight="26.0" prefWidth="63.0" text="Sign In" textFill="#827777">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Separator layoutX="1092.0" layoutY="236.0" opacity="0.7" prefHeight="0.0" prefWidth="135.0" style="-fx-background-color: #827777;" />
+      <JFXTextField fx:id="txtUsername" focusColor="#1f0c53" focusTraversable="false" layoutX="892.0" layoutY="312.0" onAction="#txtUsernameOnAction" opacity="0.6" prefHeight="3.0" prefWidth="284.0" promptText="d24hostel@gmail.com" />
+      <Label layoutX="893.0" layoutY="288.0" prefHeight="21.0" prefWidth="79.0" text="Username " textFill="#616161">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="893.0" layoutY="375.0" prefHeight="21.0" prefWidth="79.0" text="Password" textFill="#616161">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnForgetPassword" focusTraversable="false" layoutX="995.0" layoutY="499.0" onAction="#btnForgetPasswordOnAction" opacity="0.8" text="Forgot Password" textFill="#827777">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1191.0" layoutY="313.0" opacity="0.4" pickOnBounds="true">
+         <image>
+            <Image url="@../asset/icon/username.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1191.0" layoutY="394.0" opacity="0.4" pickOnBounds="true">
+         <image>
+            <Image url="@../asset/icon/password.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btnLogin" focusTraversable="false" layoutX="910.0" layoutY="467.0" onAction="#btnLoginOnAction" opacity="0.7" prefHeight="29.0" prefWidth="284.0" style="-fx-background-radius: 10; -fx-background-color: #2160c6;" text="Login" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
+      </JFXButton>
+      <JFXPasswordField fx:id="txtPassword" focusColor="#1f0c53" focusTraversable="false" layoutX="893.0" layoutY="397.0" onAction="#txtPasswordOnAction" opacity="0.6" prefHeight="3.0" prefWidth="284.0" promptText="************" />
+      <Separator layoutX="981.0" layoutY="558.0" opacity="0.7" prefHeight="0.0" prefWidth="135.0" style="-fx-background-color: #827777;" />
+      <Label layoutX="968.0" layoutY="565.0" opacity="0.8" prefHeight="10.0" prefWidth="160.0" text="Terms Of Use Privacy Policy" textFill="#827777">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblInvalidUsername" layoutX="894.0" layoutY="343.0" prefHeight="17.0" prefWidth="96.0" text="Invalid username" textFill="#d0312d" />
+      <Label fx:id="lblInvalidPassword" layoutX="892.0" layoutY="427.0" prefHeight="17.0" prefWidth="96.0" text="Invalid password" textFill="#d0312d" />
+      <Label fx:id="lblPasswordHintLabel" layoutX="938.0" layoutY="523.0" prefHeight="17.0" prefWidth="96.0" text="Password Hint  : " textFill="#d0312d" />
+      <Label fx:id="lblPasswordHint" alignment="CENTER" layoutX="1034.0" layoutY="524.0" prefHeight="17.0" prefWidth="128.0" textFill="#d0312d">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="183.0" layoutY="73.0" prefHeight="53.0" prefWidth="408.0" text="D24 Hostel - Colombo" textFill="#2160c6" wrapText="true">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
