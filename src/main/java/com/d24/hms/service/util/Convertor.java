@@ -12,75 +12,81 @@ import com.d24.hms.entity.User;
 public class Convertor {
 
     public StudentDto toStudentDto(Student student){
-        return new StudentDto(
-                student.getStudent_id(),
-                student.getName(),
-                student.getAddress(),
-                student.getContact(),
-                student.getDate(),
-                student.getGender());
+        StudentDto studentDto = new StudentDto();
+        studentDto.setStudent_id(student.getStudent_id());
+        studentDto.setName(student.getName());
+        studentDto.setAddress(student.getAddress());
+        studentDto.setContact(student.getContact());
+        studentDto.setDate(student.getDate());
+        studentDto.setGender(student.getGender());
+        return studentDto;
+
     }
 
     public Student toStudent(StudentDto studentDto){
-        return new Student(
-                studentDto.getStudent_id(),
-                studentDto.getName(),
-                studentDto.getAddress(),
-                studentDto.getContact(),
-                studentDto.getDate(),
-                studentDto.getGender());
+        Student student = new Student();
+        student.setStudent_id(studentDto.getStudent_id());
+        student.setName(studentDto.getName());
+        student.setAddress(studentDto.getAddress());
+        student.setContact(studentDto.getContact());
+        student.setDate(studentDto.getDate());
+        student.setGender(studentDto.getGender());
+        return student;
     }
 
     public RoomDto toRoomDto(Room room){
-        return new RoomDto(
-                room.getRoom_type_id(),
-                room.getType(),
-                room.getKey_money(),
-                room.getQty()
-        );
+        RoomDto roomDto = new RoomDto();
+        roomDto.setRoom_type_id(room.getRoom_type_id());
+        roomDto.setType(room.getType());
+        roomDto.setKey_money(room.getKey_money());
+        roomDto.setQty(room.getQty());
+        return roomDto;
     }
 
     public Room toRoom(RoomDto roomDto){
-        return new Room(
-                roomDto.getRoom_type_id(),
-                roomDto.getType(),
-                roomDto.getKey_money(),
-                roomDto.getQty()
-        );
+        Room room = new Room();
+        room.setRoom_type_id(roomDto.getRoom_type_id());
+        room.setType(roomDto.getType());
+        room.setKey_money(roomDto.getKey_money());
+        room.setQty(roomDto.getQty());
+        return room;
     }
 
     public Reservation toReservation(ReservationDto reservationDto){
-        return new Reservation(
-                reservationDto.getRes_id(),
-                reservationDto.getDate(),
-                reservationDto.getStudent_id(),
-                reservationDto.getRoom_type_id(),
-                reservationDto.getStatus()
-        );
+        Reservation reservation = new Reservation();
+        reservation.setRes_id(reservationDto.getRes_id());
+        reservation.setDate(reservationDto.getDate());
+        reservation.setStudent(toStudent(reservationDto.getStudentDto()));
+        reservation.setRoom(toRoom(reservationDto.getRoomDto()));
+        return reservation;
     }
 
     public ReservationDto toReservationDto(Reservation reservation){
-        return new ReservationDto(
-                reservation.getRes_id(),
-                reservation.getDate(),
-                reservation.getStudent_id(),
-                reservation.getRoom_type_id(),
-                reservation.getStatus()
-        );
+        ReservationDto reservationDto = new ReservationDto();
+        reservationDto.setRes_id(reservation.getRes_id());
+        reservationDto.setDate(reservation.getDate());
+        reservationDto.setStudentDto(toStudentDto(reservation.getStudent()));
+        reservationDto.setRoomDto(toRoomDto(reservation.getRoom()));
+        return reservationDto;
+
     }
 
     public User toUser(UserDto userDto){
-        return new User(
-                userDto.getUsername(),
-                userDto.getPassword()
-        );
+        User user = new User();
+        user.setUsername(userDto.getUsername());
+        user.setPassword(userDto.getPassword());
+        user.setJobRole(userDto.getJobRole());
+        user.setPasswordHint(userDto.getPasswordHint());
+        return user;
     }
 
     public UserDto toUserDto(User user){
-        return new UserDto(
-                user.getUsername(),
-                user.getPassword()
-        );
+        UserDto userDto = new UserDto();
+        userDto.setUsername(user.getUsername());
+        userDto.setPassword(user.getPassword());
+        userDto.setJobRole(user.getJobRole());
+        userDto.setPasswordHint(user.getPasswordHint());
+        return userDto;
     }
 
 }

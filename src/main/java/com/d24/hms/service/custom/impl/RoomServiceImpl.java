@@ -25,27 +25,23 @@ import java.util.Optional;
 
 public class RoomServiceImpl implements RoomService {
     private final Convertor convertor;
+    private final RoomDao roomDao;
+
 
     public RoomServiceImpl() {
         convertor=new Convertor();
+        roomDao=DaoFactory.getInstance().getDao( DaoType.ROOM_DAO );
     }
 
     @Override
     public boolean save(RoomDto roomDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        RoomDao roomDao= DaoFactory.getInstance().getDao(session, DaoType.ROOM_DAO );
         try{
-            boolean isSave = roomDao.save(convertor.toRoom(roomDto));
-
-//            Optional<ButtonType> choose = new Alert(Alert.AlertType.CONFIRMATION,"Room Added Successfully!",ButtonType.OK,ButtonType.CANCEL).showAndWait();
-//            if(choose.get()==ButtonType.OK){
-//                Navigation.navigate(Routes.ROOM_FORM,pane);
-//            }
+            boolean isSave = roomDao.save(convertor.toRoom(roomDto),session);
             transaction.commit();
             return true;
         }catch(Exception e){
-            //new Alert(Alert.AlertType.ERROR,"Room Not Added!").show();
             transaction.rollback();
             return false;
         }finally {
@@ -58,9 +54,8 @@ public class RoomServiceImpl implements RoomService {
     public boolean update(RoomDto roomDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        RoomDao roomDao= DaoFactory.getInstance().getDao(session, DaoType.ROOM_DAO );
         try{
-            boolean isUpdate = roomDao.update(convertor.toRoom(roomDto));
+            boolean isUpdate = roomDao.update(convertor.toRoom(roomDto),session);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -75,9 +70,8 @@ public class RoomServiceImpl implements RoomService {
     public boolean delete(RoomDto roomDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        RoomDao roomDao= DaoFactory.getInstance().getDao(session, DaoType.ROOM_DAO );
         try{
-            boolean isDelete = roomDao.delete(convertor.toRoom(roomDto));
+            boolean isDelete = roomDao.delete(convertor.toRoom(roomDto),session);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -92,9 +86,8 @@ public class RoomServiceImpl implements RoomService {
     public RoomDto search(String id) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        RoomDao roomDao= DaoFactory.getInstance().getDao(session, DaoType.ROOM_DAO );
         try{
-            Room room = roomDao.search(id);
+            Room room = roomDao.search(id,session);
             transaction.commit();
             return convertor.toRoomDto(room);
         }catch(Exception e){
@@ -109,9 +102,8 @@ public class RoomServiceImpl implements RoomService {
     public List<RoomDto> getAll() {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        RoomDao roomDao= DaoFactory.getInstance().getDao(session, DaoType.ROOM_DAO );
         try{
-            List<Room> list = roomDao.getAll();
+            List<Room> list = roomDao.getAll(session);
             List<RoomDto> dtoList = new ArrayList<>();
 
             for (Room room:list) {
@@ -132,9 +124,8 @@ public class RoomServiceImpl implements RoomService {
     public String getLastId() {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        RoomDao roomDao= DaoFactory.getInstance().getDao(session, DaoType.ROOM_DAO );
         try{
-            String lastId = roomDao.getLastId();
+            String lastId = roomDao.getLastId(session);
             transaction.commit();
             return lastId;
         }catch(Exception e){
@@ -149,9 +140,8 @@ public class RoomServiceImpl implements RoomService {
     public List<RoomDto> roomSearchByText(String text) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        RoomDao roomDao= DaoFactory.getInstance().getDao(session, DaoType.ROOM_DAO );
         try{
-            List<Room> rooms = roomDao.roomSearchByText(text);
+            List<Room> rooms = roomDao.roomSearchByText(text,session);
             List<RoomDto> roomDtoList = new ArrayList<>();
 
             for(Room room : rooms){

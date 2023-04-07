@@ -48,8 +48,11 @@ public class PopupRoomEditFormController implements Initializable {
     private RoomFormController roomFormController;
     private com.d24.hms.tm.RoomTM roomTM;
 
+    private RoomService roomService;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        roomService = ServiceFactory.getInstance().getService(ServiceType.ROOM_SERVICE);
         txtRoomTypeId.setDisable(true);
     }
 
@@ -69,7 +72,6 @@ public class PopupRoomEditFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws IOException {
-        RoomService roomService = ServiceFactory.getInstance().getService(ServiceType.ROOM_SERVICE);
         Optional<ButtonType> choose = new Alert(Alert.AlertType.WARNING, "Are you sure?", ButtonType.OK, ButtonType.CANCEL).showAndWait();
         if (choose.get() == ButtonType.OK) {
             if (roomService.delete(getRoomDto())) {
@@ -83,19 +85,17 @@ public class PopupRoomEditFormController implements Initializable {
 
     private RoomDto getRoomDto() {
 
-        RoomDto roomDto = new RoomDto(
-                txtRoomTypeId.getText(),
-                txtRoomType.getText(),
-                Double.parseDouble(txtKeyMoney.getText()),
-                Integer.valueOf(txtQty.getText())
-        );
+        RoomDto roomDto = new RoomDto();
+
+        roomDto.setRoom_type_id(txtRoomTypeId.getText());
+        roomDto.setType(txtRoomType.getText());
+        roomDto.setKey_money(Double.parseDouble(txtKeyMoney.getText()));
+        roomDto.setQty(Integer.parseInt(txtQty.getText()));
         return roomDto;
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws IOException {
-        RoomService roomService = ServiceFactory.getInstance().getService(ServiceType.ROOM_SERVICE);
-
         if (roomService.update(getRoomDto())) {
             new Alert(Alert.AlertType.CONFIRMATION, "Updated!").show();
             Navigation.navigate(Routes.POPUP_ROOM_EDIT_FORM, pane);

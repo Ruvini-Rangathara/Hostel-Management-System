@@ -74,14 +74,15 @@ public class PopupStudentSaveFormController implements Initializable {
     @FXML
     void btnRegisterOnAction(ActionEvent event) throws IOException {
         StudentService studentService = ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
-        StudentDto studentDto = new StudentDto(
-                lblStudentId.getText(),
-                txtName.getText(),
-                txtAddress.getText(),
-                txtContactNo.getText(),
-                dteDate.getValue(),
-                String.valueOf(cmbGender.getValue())
-        );
+        StudentDto studentDto = new StudentDto();
+
+        studentDto.setStudent_id(lblStudentId.getText());
+        studentDto.setName(txtName.getText());
+        studentDto.setName(txtName.getText());
+        studentDto.setContact(txtContactNo.getText());
+        studentDto.setDate(dteDate.getValue());
+        studentDto.setGender(String.valueOf(cmbGender.getValue()));
+
         if (studentService.save(studentDto)) {
             Optional<ButtonType> choose = new Alert(Alert.AlertType.CONFIRMATION, "Student Added Successfully!", ButtonType.OK, ButtonType.CANCEL).showAndWait();
             if (choose.get() == ButtonType.OK) {

@@ -62,6 +62,14 @@ public class Navigation {
                 initUI2("popup_room_edit_form.fxml");
                 break;
 
+            case POPUP_RESERVATION_SAVE_FORM:
+                initUI2("popup_reservation_save_form.fxml");
+                break;
+
+            case POPUP_RESERVATION_EDIT_FORM:
+                initUI2("popup_reservation_edit_form.fxml");
+                break;
+
 
             default:
                 new Alert(Alert.AlertType.ERROR, "UI Not Found!").show();

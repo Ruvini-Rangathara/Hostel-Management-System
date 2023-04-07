@@ -1,11 +1,7 @@
 package com.d24.hms;
 
-import com.d24.hms.dao.DaoFactory;
-import com.d24.hms.dao.DaoType;
-import com.d24.hms.dao.custom.StudentDao;
 import com.d24.hms.dto.RoomDto;
 import com.d24.hms.dto.StudentDto;
-import com.d24.hms.dto.UserDto;
 import com.d24.hms.entity.Reservation;
 import com.d24.hms.entity.Room;
 import com.d24.hms.entity.Student;
@@ -13,36 +9,17 @@ import com.d24.hms.service.ServiceFactory;
 import com.d24.hms.service.ServiceType;
 import com.d24.hms.service.custom.RoomService;
 import com.d24.hms.service.custom.StudentService;
-import com.d24.hms.service.custom.UserService;
 import com.d24.hms.service.util.Convertor;
 import com.d24.hms.util.FactoryConfiguration;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-public class AppInitializer extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/login_form.fxml"))));
-        stage.setTitle("D24 Hostel Management System");
-        stage.getIcons().add(new Image("asset/icon/icon1.png"));
-//        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/welcome_form.fxml")),0,0);
-//        stage.setScene(scene);
-        //stage.setFullScreen(true);
-        stage.show();
-    }
-
+public class Test {
     public static void main(String[] args) {
+
+//===========================================================================================
 
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
@@ -72,8 +49,7 @@ public class AppInitializer extends Application {
             session.close();
         }
 
-//===================================================================================================
-
+//================================================================================================
         Session session1 = FactoryConfiguration.getInstance().getSession();
         Transaction transaction1 = session1.beginTransaction();
         try{
@@ -100,7 +76,7 @@ public class AppInitializer extends Application {
             session1.close();
         }
 
-        //===================================================================================================
+//===================================================================================================
         Session session2 = FactoryConfiguration.getInstance().getSession();
         Transaction transaction2 = session2.beginTransaction();
         try{
@@ -130,36 +106,7 @@ public class AppInitializer extends Application {
         }
 
 
-        //===================================================================================================
-        Session session3 = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction3 = session3.beginTransaction();
-        try{
-
-            Convertor convertor = new Convertor();
-            UserService userService = ServiceFactory.getInstance().getService(ServiceType.USER_SERVICE);
-
-            UserDto userDto1 = new UserDto();
-            userDto1.setUsername("admin");
-            userDto1.setPassword("1234");
-            userDto1.setPasswordHint("Admin1234");
-            session3.save(userDto1);
-
-            UserDto userDto2 = new UserDto();
-            userDto2.setUsername("User");
-            userDto2.setPassword("123");
-            userDto2.setPasswordHint("User123");
-            session3.save(userDto2);
-
-            transaction3.commit();
-
-        }catch(Exception e){
-            transaction3.rollback();
-        }finally {
-            session3.close();
-        }
 
 
-
-        launch();
     }
 }

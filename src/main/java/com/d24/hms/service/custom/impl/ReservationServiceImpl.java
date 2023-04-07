@@ -20,8 +20,12 @@ import java.util.List;
 public class ReservationServiceImpl implements ReservationService {
 
     private final Convertor convertor;
+    private final ReservationDao reservationDao;
+    private final RoomDao roomDao;
 
     public ReservationServiceImpl() {
+        reservationDao= DaoFactory.getInstance().getDao(DaoType.RESERVATION_DAO );
+        roomDao=DaoFactory.getInstance().getDao(DaoType.ROOM_DAO);
         convertor=new Convertor();
 
     }
@@ -30,10 +34,8 @@ public class ReservationServiceImpl implements ReservationService {
     public boolean save(ReservationDto reservationDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        ReservationDao reservationDao= DaoFactory.getInstance().getDao(session, DaoType.RESERVATION_DAO );
-        RoomDao roomDao=DaoFactory.getInstance().getDao(session,DaoType.ROOM_DAO);
         try{
-            reservationDao.save(convertor.toReservation(reservationDto));
+            reservationDao.save(convertor.toReservation(reservationDto),session);
 
             transaction.commit();
             return true;
@@ -49,9 +51,8 @@ public class ReservationServiceImpl implements ReservationService {
     public boolean update(ReservationDto reservationDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        ReservationDao reservationDao= DaoFactory.getInstance().getDao(session, DaoType.RESERVATION_DAO );
         try{
-            boolean isUpdate = reservationDao.update(convertor.toReservation(reservationDto));
+            reservationDao.update(convertor.toReservation(reservationDto),session);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -66,9 +67,8 @@ public class ReservationServiceImpl implements ReservationService {
     public boolean delete(ReservationDto reservationDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        ReservationDao reservationDao= DaoFactory.getInstance().getDao(session, DaoType.RESERVATION_DAO );
         try{
-            boolean isDelete = reservationDao.delete(convertor.toReservation(reservationDto));
+            reservationDao.delete(convertor.toReservation(reservationDto),session);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -83,9 +83,8 @@ public class ReservationServiceImpl implements ReservationService {
     public ReservationDto search(String id) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        ReservationDao reservationDao= DaoFactory.getInstance().getDao(session, DaoType.RESERVATION_DAO );
         try{
-            Reservation reservation = reservationDao.search(id);
+            Reservation reservation = reservationDao.search(id,session);
             transaction.commit();
             return convertor.toReservationDto(reservation);
         }catch(Exception e){
@@ -100,9 +99,8 @@ public class ReservationServiceImpl implements ReservationService {
     public List<ReservationDto> getAll() {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        ReservationDao reservationDao= DaoFactory.getInstance().getDao(session, DaoType.RESERVATION_DAO );
         try{
-            List<Reservation> list = reservationDao.getAll();
+            List<Reservation> list = reservationDao.getAll(session);
             List<ReservationDto> dtoList = new ArrayList<>();
 
             for (Reservation reservation:list) {
@@ -121,6 +119,40 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public String getLastId() {
-        return null;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            String lastId = reservationDao.getLastId(session);
+            transaction.commit();
+            return lastId;
+        }catch(Exception e){
+            transaction.rollback();
+            return null;
+        }finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<ReservationDto> reservationSearchByText(String text) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            List<Reservation> reservations = reservationDao.reservationSearchByText(text,session);
+            List<ReservationDto> reservationDtoList = new ArrayList<>();
+
+            for(Reservation reservation : reservations){
+                ReservationDto reservationDto = convertor.toReservationDto(reservation);
+                reservationDtoList.add(reservationDto);
+            }
+
+            transaction.commit();
+            return reservationDtoList;
+        }catch(Exception e){
+            transaction.rollback();
+            return null;
+        }finally {
+            session.close();
+        }
     }
 }

@@ -15,19 +15,19 @@ public class DaoFactory {
         return daoFactory==null?(daoFactory=new DaoFactory()):daoFactory;
     }
 
-    public <T extends SuperDao> T getDao(Session session,DaoType daoType) {
+    public <T extends SuperDao> T getDao(DaoType daoType) {
         switch (daoType){
             case STUDENT_DAO:
-                return (T)new StudentDaoImpl(session);
+                return (T)new StudentDaoImpl();
 
             case ROOM_DAO:R:
-                return (T)new RoomDaoImpl(session);
+                return (T)new RoomDaoImpl();
 
             case RESERVATION_DAO:
-                return (T)new ReservationDaoImpl(session);
+                return (T)new ReservationDaoImpl();
 
             case USER_DAO:
-                return (T) new UserDaoImpl(session);
+                return (T) new UserDaoImpl();
 
             default:
                 return null;

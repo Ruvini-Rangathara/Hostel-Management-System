@@ -9,38 +9,33 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
-    private final Session session;
-
-    public UserDaoImpl(Session session) {
-        this.session = session;
-    }
 
     @Override
-    public boolean save(User user) {
+    public boolean save(User user,Session session) {
         session.save(user);
         return true;
     }
 
     @Override
-    public boolean update(User user) {
+    public boolean update(User user,Session session) {
         session.update(user);
         return true;
     }
 
     @Override
-    public boolean delete(User user) {
+    public boolean delete(User user,Session session) {
         session.delete(user);
         return true;
     }
 
     @Override
-    public User search(String id) {
+    public User search(String id,Session session) {
         User user = session.get(User.class, id);
         return user;
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAll(Session session) {
         String hql = "FROM user u ORDER BY u.username DESC";
         Query query = session.createQuery(hql);
         List<User> list= query.list();
@@ -48,7 +43,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public String getLastId() {
+    public String getLastId(Session session) {
         return null;
     }
 }

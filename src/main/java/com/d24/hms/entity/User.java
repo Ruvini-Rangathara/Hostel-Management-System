@@ -15,4 +15,6 @@ public class User implements SuperEntity{
     @Id
     private String username;
     private String password;
+    private String jobRole;
+    private String passwordHint;
 }

@@ -1,21 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="696.0" prefWidth="1122.0" style="-fx-background-color: E1E2E6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.UserFormController">
+<AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: #4E6E81;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.UserFormController">
    <children>
-      <ImageView fitHeight="696.0" fitWidth="1122.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="500.0" fitWidth="667.0" opacity="0.6" pickOnBounds="true">
          <image>
             <Image url="@../asset/image/bg1.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="433.0" layoutY="15.0" opacity="0.8" text="Manage User" textFill="#1f3590">
+      <Label layoutX="385.0" layoutY="11.0" opacity="0.8" prefHeight="0.0" prefWidth="234.0" text="Manage User" textFill="#1f3590">
          <font>
             <Font size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="120.0" layoutY="150.0" prefHeight="20.0" prefWidth="157.0" text="Admin Username        :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtAdminUsername" focusTraversable="false" layoutX="289.0" layoutY="147.0" onAction="#txtAdminUsernameOnAction" prefHeight="30.0" prefWidth="256.0" promptText="admin@gmail.com">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="120.0" layoutY="190.0" prefHeight="20.0" prefWidth="157.0" text="Admin Password         :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="txtAdminPassword" layoutX="289.0" layoutY="187.0" onAction="#txtAdminPasswordOnAction" prefHeight="30.0" prefWidth="256.0" />
+      <Pane layoutX="77.0" layoutY="272.0" prefHeight="198.0" prefWidth="510.0" style="-fx-background-color: #CDCDCD; -fx-background-radius: 10px;" />
+      <Label layoutX="139.0" layoutY="293.0" prefHeight="20.0" prefWidth="114.0" text="Username         :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUsername" focusTraversable="false" layoutX="265.0" layoutY="290.0" onAction="#txtUsernameOnAction" prefHeight="30.0" prefWidth="256.0" promptText="user@gmail.com">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="139.0" layoutY="332.0" prefHeight="20.0" prefWidth="114.0" text="Password          :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="txtPassword" layoutX="265.0" layoutY="329.0" onAction="#txtPasswordOnAction" prefHeight="30.0" prefWidth="256.0" />
+      <JFXButton fx:id="btnDelete" layoutX="452.0" layoutY="418.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="67.0" style="-fx-background-color: #444444;" text="Delete" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnUpdate" layoutX="358.0" layoutY="418.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="67.0" style="-fx-background-color: #5AB1FA;" text="Update" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnCreate" layoutX="266.0" layoutY="418.0" onAction="#btnCreateOnAction" prefHeight="30.0" prefWidth="67.0" style="-fx-background-color: #19376D;" text="Create" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ImageView fitHeight="120.0" fitWidth="129.0" layoutX="121.0" layoutY="28.0" opacity="0.5" pickOnBounds="true">
+         <image>
+            <Image url="@../asset/icon/settingIcon.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="139.0" layoutY="373.0" prefHeight="20.0" prefWidth="114.0" text="Password Hint  :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="txtPasswordHint" layoutX="265.0" layoutY="370.0" onAction="#txtPasswordHintOnAction" prefHeight="30.0" prefWidth="256.0" />
+      <Label layoutX="120.0" layoutY="225.0" prefHeight="20.0" prefWidth="157.0" text="Password Hint            :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAdminPasswordHint" layoutX="290.0" layoutY="225.0" prefHeight="20.0" prefWidth="256.0" text="admin1234" textFill="RED">
+         <font>
+            <Font size="14.0" />
          </font>
       </Label>
    </children>

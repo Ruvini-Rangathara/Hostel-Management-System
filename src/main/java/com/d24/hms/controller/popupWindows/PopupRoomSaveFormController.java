@@ -39,14 +39,16 @@ public class PopupRoomSaveFormController implements Initializable {
     @FXML
     private JFXButton btnSave;
 
+    private RoomService roomService;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        roomService = ServiceFactory.getInstance().getService(ServiceType.ROOM_SERVICE);
         setId();
     }
 
 
     private void setId() {
-        RoomService roomService = ServiceFactory.getInstance().getService(ServiceType.ROOM_SERVICE);
         String lastRoomId = roomService.getLastId();
         if (lastRoomId == null) {
             lblRoomTypeId.setText("RM-0001");
@@ -62,13 +64,13 @@ public class PopupRoomSaveFormController implements Initializable {
     @FXML
     void btnSaveOnAction(ActionEvent event) throws IOException {
 
-        RoomService roomService = ServiceFactory.getInstance().getService(ServiceType.ROOM_SERVICE);
-        RoomDto roomDto = new RoomDto(
-                lblRoomTypeId.getText(),
-                txtRoomType.getText(),
-                Double.parseDouble(txtKeyMoney.getText()),
-                Integer.parseInt(txtQty.getText())
-        );
+        RoomDto roomDto = new RoomDto();
+
+        roomDto.setRoom_type_id(lblRoomTypeId.getText());
+        roomDto.setType(txtRoomType.getText());
+        roomDto.setKey_money(Double.parseDouble(txtKeyMoney.getText()));
+        roomDto.setQty(Integer.parseInt(txtQty.getText()));
+
         if (roomService.save(roomDto)) {
             Optional<ButtonType> choose = new Alert(Alert.AlertType.CONFIRMATION, "Room Added Successfully!", ButtonType.OK, ButtonType.CANCEL).showAndWait();
             if (choose.get() == ButtonType.OK) {

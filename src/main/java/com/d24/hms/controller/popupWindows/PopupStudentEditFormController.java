@@ -50,12 +50,13 @@ public class PopupStudentEditFormController implements Initializable {
     @FXML
     private JFXButton btnUpdate;
 
-
+    private StudentService studentService;
     private StudentFormController studentFormController;
     private com.d24.hms.tm.StudentTM studentTM;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        studentService=ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
         txtId.setDisable(true);
 
         ObservableList<String> gender = FXCollections.observableArrayList();
@@ -80,7 +81,6 @@ public class PopupStudentEditFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws IOException {
-        StudentService studentService = ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
         Optional<ButtonType> choose = new Alert(Alert.AlertType.WARNING,"Are you sure?",ButtonType.OK,ButtonType.CANCEL).showAndWait();
         if(choose.get()==ButtonType.OK){
             if(studentService.delete(getStudentDto())){
@@ -100,21 +100,21 @@ public class PopupStudentEditFormController implements Initializable {
         }else{
             date=dteDate.getValue();
         }
-        StudentDto studentDto = new StudentDto(
-                txtId.getText(),
-                txtName.getText(),
-                txtAddress.getText(),
-                txtContactNo.getText(),
-                date,
-                String.valueOf(cmbGender.getValue())
-        );
+        StudentDto studentDto = new StudentDto();
+
+        studentDto.setStudent_id(txtId.getText());
+        studentDto.setName(txtName.getText());
+        studentDto.setName(txtName.getText());
+        studentDto.setContact(txtContactNo.getText());
+        studentDto.setDate(date);
+        studentDto.setGender(String.valueOf(cmbGender.getValue()));
+
         return studentDto;
     }
 
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws IOException {
-        StudentService studentService = ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
 
         if (studentService.update(getStudentDto())){
             new Alert(Alert.AlertType.CONFIRMATION,"Updated!").show();

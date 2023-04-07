@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -37,6 +38,7 @@
                   <Image url="@../asset/icon/icon1.png" />
                </image>
             </ImageView>
+            <RadioButton fx:id="rbtnShowPassword" layoutX="289.0" layoutY="374.0" mnemonicParsing="false" onAction="#rbtnShowPasswordOnAction" text="Show Password " />
          </children>
       </Pane>
       <Separator layoutX="740.0" layoutY="74.0" opacity="0.2" orientation="VERTICAL" prefHeight="563.0" prefWidth="0.0" style="-fx-background-color: #8a8888;" />
@@ -58,7 +60,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnForgetPassword" focusTraversable="false" layoutX="995.0" layoutY="499.0" onAction="#btnForgetPasswordOnAction" opacity="0.8" text="Forgot Password" textFill="#827777">
+      <JFXButton fx:id="btnForgetPassword" focusTraversable="false" layoutX="995.0" layoutY="520.0" onAction="#btnForgetPasswordOnAction" opacity="0.8" text="Forgot Password" textFill="#827777">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -73,7 +75,7 @@
             <Image url="@../asset/icon/password.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="btnLogin" focusTraversable="false" layoutX="910.0" layoutY="467.0" onAction="#btnLoginOnAction" opacity="0.7" prefHeight="29.0" prefWidth="284.0" style="-fx-background-radius: 10; -fx-background-color: #2160c6;" text="Login" textFill="WHITE">
+      <JFXButton fx:id="btnLogin" focusTraversable="false" layoutX="910.0" layoutY="488.0" onAction="#btnLoginOnAction" opacity="0.7" prefHeight="29.0" prefWidth="284.0" style="-fx-background-radius: 10; -fx-background-color: #2160c6;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -85,16 +87,16 @@
          </effect>
       </JFXButton>
       <JFXPasswordField fx:id="txtPassword" focusColor="#1f0c53" focusTraversable="false" layoutX="893.0" layoutY="397.0" onAction="#txtPasswordOnAction" opacity="0.6" prefHeight="3.0" prefWidth="284.0" promptText="************" />
-      <Separator layoutX="981.0" layoutY="558.0" opacity="0.7" prefHeight="0.0" prefWidth="135.0" style="-fx-background-color: #827777;" />
-      <Label layoutX="968.0" layoutY="565.0" opacity="0.8" prefHeight="10.0" prefWidth="160.0" text="Terms Of Use Privacy Policy" textFill="#827777">
+      <Separator layoutX="981.0" layoutY="579.0" opacity="0.7" prefHeight="0.0" prefWidth="135.0" style="-fx-background-color: #827777;" />
+      <Label layoutX="968.0" layoutY="586.0" opacity="0.8" prefHeight="10.0" prefWidth="160.0" text="Terms Of Use Privacy Policy" textFill="#827777">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
       <Label fx:id="lblInvalidUsername" layoutX="894.0" layoutY="343.0" prefHeight="17.0" prefWidth="96.0" text="Invalid username" textFill="#d0312d" />
       <Label fx:id="lblInvalidPassword" layoutX="892.0" layoutY="427.0" prefHeight="17.0" prefWidth="96.0" text="Invalid password" textFill="#d0312d" />
-      <Label fx:id="lblPasswordHintLabel" layoutX="938.0" layoutY="523.0" prefHeight="17.0" prefWidth="96.0" text="Password Hint  : " textFill="#d0312d" />
-      <Label fx:id="lblPasswordHint" alignment="CENTER" layoutX="1034.0" layoutY="524.0" prefHeight="17.0" prefWidth="128.0" textFill="#d0312d">
+      <Label fx:id="lblPasswordHintLabel" layoutX="938.0" layoutY="544.0" prefHeight="17.0" prefWidth="96.0" text="Password Hint  : " textFill="#d0312d" />
+      <Label fx:id="lblPasswordHint" alignment="CENTER" layoutX="1034.0" layoutY="545.0" prefHeight="17.0" prefWidth="128.0" textFill="#d0312d">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -104,5 +106,6 @@
             <Font size="40.0" />
          </font>
       </Label>
+      <Label fx:id="lblShowPassword" layoutX="892.0" layoutY="453.0" prefHeight="17.0" prefWidth="207.0" text="admin1234" />
    </children>
 </AnchorPane>

@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class UserDto implements SuperDto{
     private String username;
     private String password;
+    private String jobRole;
+    private String passwordHint;
 }

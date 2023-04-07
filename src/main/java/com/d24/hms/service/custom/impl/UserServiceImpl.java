@@ -20,18 +20,19 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private final Convertor convertor;
+    private final UserDao userDao;
 
     public UserServiceImpl() {
         convertor=new Convertor();
+        userDao= DaoFactory.getInstance().getDao(DaoType.USER_DAO );
     }
 
     @Override
     public boolean save(UserDto userDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        UserDao userDao= DaoFactory.getInstance().getDao(session, DaoType.USER_DAO );
         try{
-            boolean isSave = userDao.update(convertor.toUser(userDto));
+            boolean isSave = userDao.update(convertor.toUser(userDto), session);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -46,9 +47,8 @@ public class UserServiceImpl implements UserService {
     public boolean update(UserDto userDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        UserDao userDao= DaoFactory.getInstance().getDao(session, DaoType.USER_DAO );
         try{
-            boolean isUpdate = userDao.update(convertor.toUser(userDto));
+            boolean isUpdate = userDao.update(convertor.toUser(userDto),session);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -63,9 +63,8 @@ public class UserServiceImpl implements UserService {
     public boolean delete(UserDto userDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        UserDao userDao= DaoFactory.getInstance().getDao(session, DaoType.USER_DAO );
         try{
-            boolean isDelete = userDao.delete(convertor.toUser(userDto));
+            boolean isDelete = userDao.delete(convertor.toUser(userDto),session);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -80,9 +79,8 @@ public class UserServiceImpl implements UserService {
     public UserDto search(String id) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        UserDao userDao= DaoFactory.getInstance().getDao(session, DaoType.USER_DAO );
         try{
-            User user = userDao.search(id);
+            User user = userDao.search(id,session);
             transaction.commit();
             return convertor.toUserDto(user);
         }catch(Exception e){
@@ -97,9 +95,8 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getAll() {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        UserDao userDao= DaoFactory.getInstance().getDao(session, DaoType.USER_DAO );
         try{
-            List<User> list = userDao.getAll();
+            List<User> list = userDao.getAll( session);
             List<UserDto> dtoList = new ArrayList<>();
 
             for (User user:list) {

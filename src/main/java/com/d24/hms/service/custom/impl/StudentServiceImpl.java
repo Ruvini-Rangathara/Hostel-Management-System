@@ -20,18 +20,19 @@ import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
     private final Convertor convertor;
+    private final StudentDao studentDao;
 
     public StudentServiceImpl() {
         convertor=new Convertor();
+        studentDao= DaoFactory.getInstance().getDao(DaoType.STUDENT_DAO );
     }
 
     @Override
     public boolean save(StudentDto studentDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        StudentDao studentDao= DaoFactory.getInstance().getDao(session, DaoType.STUDENT_DAO );
         try{
-            studentDao.save(convertor.toStudent(studentDto));
+            studentDao.save(convertor.toStudent(studentDto),session);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -46,9 +47,8 @@ public class StudentServiceImpl implements StudentService {
     public boolean update(StudentDto studentDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        StudentDao studentDao= DaoFactory.getInstance().getDao(session, DaoType.STUDENT_DAO );
         try{
-            boolean isUpdate = studentDao.update(convertor.toStudent(studentDto));
+            boolean isUpdate = studentDao.update(convertor.toStudent(studentDto),session);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -63,9 +63,8 @@ public class StudentServiceImpl implements StudentService {
     public boolean delete(StudentDto studentDto) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        StudentDao studentDao= DaoFactory.getInstance().getDao(session, DaoType.STUDENT_DAO );
         try{
-            boolean isDelete = studentDao.delete(convertor.toStudent(studentDto));
+            boolean isDelete = studentDao.delete(convertor.toStudent(studentDto),session);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -80,9 +79,8 @@ public class StudentServiceImpl implements StudentService {
     public StudentDto search(String id) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        StudentDao studentDao= DaoFactory.getInstance().getDao(session, DaoType.STUDENT_DAO );
         try{
-            Student student = studentDao.search(id);
+            Student student = studentDao.search(id,session);
             transaction.commit();
             return convertor.toStudentDto(student);
         }catch(Exception e){
@@ -97,9 +95,8 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentDto> getAll() {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        StudentDao studentDao= DaoFactory.getInstance().getDao(session, DaoType.STUDENT_DAO );
         try{
-            List<Student> list = studentDao.getAll();
+            List<Student> list = studentDao.getAll(session);
             List<StudentDto> dtoList = new ArrayList<>();
 
             for (Student student:list) {
@@ -120,9 +117,8 @@ public class StudentServiceImpl implements StudentService {
     public String getLastId() {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        StudentDao studentDao= DaoFactory.getInstance().getDao(session, DaoType.STUDENT_DAO );
         try{
-            String lastId = studentDao.getLastId();
+            String lastId = studentDao.getLastId(session);
             transaction.commit();
             return lastId;
         }catch(Exception e){
@@ -137,9 +133,8 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentDto> studentSearchByText(String text) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        StudentDao studentDao= DaoFactory.getInstance().getDao(session, DaoType.STUDENT_DAO );
         try{
-            List<Student> students = studentDao.studentSearchByText(text);
+            List<Student> students = studentDao.studentSearchByText(text,session);
             List<StudentDto> studentDtoList = new ArrayList<>();
 
             for(Student student : students){
