@@ -56,14 +56,15 @@ public class PopupReservationSaveFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtRoomTypeId.setDisable(true);
         txtRoomType.setDisable(true);
         txtStudentName.setDisable(true);
         txtKeyMoney.setDisable(true);
-        setId();
+
         reservationService=ServiceFactory.getInstance().getService(ServiceType.RESERVATION_SERVICE);
         studentService=ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
         roomService=ServiceFactory.getInstance().getService(ServiceType.ROOM_SERVICE);
+
+        setId();
     }
 
 
@@ -82,12 +83,14 @@ public class PopupReservationSaveFormController implements Initializable {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) throws IOException {
-
         RoomDto roomDto = roomService.search(txtRoomTypeId.getText());
+        int oldQty=roomDto.getQty();
+        roomDto.setQty(oldQty-1);
         StudentDto studentDto = studentService.search(txtStudentId.getText());
 
         ReservationDto reservationDto = new ReservationDto();
 
+        reservationDto.setRes_id(lblReservationId.getText());
         reservationDto.setDate(dteDate.getValue());
         reservationDto.setStudentDto(studentDto);
         reservationDto.setRoomDto(roomDto);
@@ -108,11 +111,16 @@ public class PopupReservationSaveFormController implements Initializable {
 
     @FXML
     void txtRoomTypeIdOnAction(ActionEvent event) {
+        RoomDto roomDto = roomService.search(txtRoomTypeId.getText());
+        txtKeyMoney.setText(String.valueOf(roomDto.getKey_money()));
+        txtRoomType.setText(roomDto.getType());
         txtStatus.requestFocus();
     }
 
     @FXML
     void txtStudentIdOnAction(ActionEvent event) {
+        StudentDto studentDto = studentService.search(txtStudentId.getText());
+        txtStudentName.setText(studentDto.getName());
         txtRoomTypeId.requestFocus();
     }
 

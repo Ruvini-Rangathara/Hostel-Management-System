@@ -23,7 +23,7 @@
                   <Image url="@../asset/icon/icon1.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="btnRoom" focusTraversable="false" layoutY="300.0" onAction="#btnRoomOnAction" opacity="0.9" prefHeight="44.0" prefWidth="240.0" text="   Rooms">
+            <JFXButton fx:id="btnRoom" focusTraversable="false" layoutY="300.0" onAction="#btnRoomOnAction" prefHeight="44.0" prefWidth="240.0" text="   Rooms">
                <graphic>
                   <ImageView fitHeight="44.0" fitWidth="47.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -43,7 +43,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnStudent" focusTraversable="false" layoutY="357.0" onAction="#btnStudentOnAction" opacity="0.9" prefHeight="44.0" prefWidth="240.0" text="   Students">
+            <JFXButton fx:id="btnStudent" focusTraversable="false" layoutY="357.0" onAction="#btnStudentOnAction" prefHeight="44.0" prefWidth="240.0" text="   Students">
                <graphic>
                   <ImageView fitHeight="44.0" fitWidth="47.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -58,7 +58,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnReservation" focusTraversable="false" layoutY="414.0" onAction="#btnReservationOnAction" opacity="0.9" prefHeight="44.0" prefWidth="240.0" text="   Reservations">
+            <JFXButton fx:id="btnReservation" focusTraversable="false" layoutY="414.0" onAction="#btnReservationOnAction" prefHeight="44.0" prefWidth="240.0" text="   Reservations">
                <graphic>
                   <ImageView fitHeight="44.0" fitWidth="47.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -73,7 +73,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnSettings" focusTraversable="false" layoutY="471.0" onAction="#btnSettingsOnAction" opacity="0.9" prefHeight="44.0" prefWidth="240.0" text="   Settings">
+            <JFXButton fx:id="btnSettings" focusTraversable="false" layoutY="471.0" onAction="#btnSettingsOnAction" prefHeight="44.0" prefWidth="240.0" text="   Settings">
                <graphic>
                   <ImageView fitHeight="44.0" fitWidth="47.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -115,9 +115,47 @@
       </Pane>
       <AnchorPane fx:id="pane2" layoutX="240.0" prefHeight="696.0" prefWidth="1122.0">
          <children>
-            <Label fx:id="lblDate" alignment="CENTER" layoutX="766.0" layoutY="16.0" opacity="0.5" prefHeight="30.0" prefWidth="326.0" style="-fx-background-color: #7F7F7F; -fx-background-radius: 10px;" text="2023 - 12-22" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="lblDate" alignment="CENTER" layoutX="766.0" layoutY="27.0" opacity="0.5" prefHeight="30.0" prefWidth="326.0" style="-fx-background-color: #7F7F7F; -fx-background-radius: 10px;" text="2023 - 12-22" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="52.0" text="Dashboard" textFill="#1f3590">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnKeyMoney" layoutX="159.0" layoutY="143.0" onAction="#btnKeyMoneyOnAction" prefHeight="117.0" prefWidth="230.0" style="-fx-background-color: #57809F; -fx-background-radius: 20px;" text="Key money payments" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <ImageView fitHeight="423.0" fitWidth="539.0" layoutX="518.0" layoutY="161.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../asset/image/hostel3.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="159.0" layoutY="307.0" prefHeight="117.0" prefWidth="230.0" style="-fx-background-color: #7B925F; -fx-background-radius: 20;" text="                              Rooms" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="159.0" layoutY="470.0" prefHeight="117.0" prefWidth="230.0" style="-fx-background-color: #31696E; -fx-background-radius: 20;" text="                                Students" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblRoomCount" alignment="CENTER" layoutX="234.0" layoutY="330.0" prefHeight="36.0" prefWidth="81.0" text="25" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblStudentCount" alignment="CENTER" layoutX="234.0" layoutY="493.0" prefHeight="36.0" prefWidth="81.0" text="25" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
                </font>
             </Label>
          </children></AnchorPane>

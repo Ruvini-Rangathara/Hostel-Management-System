@@ -9,6 +9,7 @@ import com.d24.hms.dto.UserDto;
 import com.d24.hms.entity.Reservation;
 import com.d24.hms.entity.Room;
 import com.d24.hms.entity.Student;
+import com.d24.hms.entity.User;
 import com.d24.hms.service.ServiceFactory;
 import com.d24.hms.service.ServiceType;
 import com.d24.hms.service.custom.RoomService;
@@ -33,12 +34,9 @@ import java.util.List;
 public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/login_form.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("/view/welcome_form.fxml"))));
         stage.setTitle("D24 Hostel Management System");
         stage.getIcons().add(new Image("asset/icon/icon1.png"));
-//        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/welcome_form.fxml")),0,0);
-//        stage.setScene(scene);
-        //stage.setFullScreen(true);
         stage.show();
     }
 
@@ -121,6 +119,21 @@ public class AppInitializer extends Application {
 
             session2.save(reservation1);
 
+            RoomDto roomDto1 = roomService.search("RM-00002");
+            StudentDto studentDto1 = studentService.search("S0002");
+
+            Reservation reservation2 = new Reservation();
+            reservation2.setRes_id("RE-0002");
+            reservation2.setDate(LocalDate.now());
+            reservation2.setRoom(convertor.toRoom(roomDto1));
+            reservation2.setStudent(convertor.toStudent(studentDto1));
+            reservation2.setStatus("NotPaid");
+
+            session2.save(reservation2);
+
+
+
+
             transaction2.commit();
 
         }catch(Exception e){
@@ -138,17 +151,19 @@ public class AppInitializer extends Application {
             Convertor convertor = new Convertor();
             UserService userService = ServiceFactory.getInstance().getService(ServiceType.USER_SERVICE);
 
-            UserDto userDto1 = new UserDto();
-            userDto1.setUsername("admin");
-            userDto1.setPassword("1234");
-            userDto1.setPasswordHint("Admin1234");
-            session3.save(userDto1);
+            User user1 = new User();
+            user1.setUsername("admin");
+            user1.setPassword("1234");
+            user1.setPasswordHint("Admin1234");
+            user1.setJobRole("Admin");
+            session3.save(user1);
 
-            UserDto userDto2 = new UserDto();
-            userDto2.setUsername("User");
-            userDto2.setPassword("123");
-            userDto2.setPasswordHint("User123");
-            session3.save(userDto2);
+            User user2 = new User();
+            user2.setUsername("User");
+            user2.setPassword("123");
+            user2.setPasswordHint("User123");
+            user2.setJobRole("User1");
+            session3.save(user2);
 
             transaction3.commit();
 

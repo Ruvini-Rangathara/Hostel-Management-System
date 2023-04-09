@@ -58,4 +58,12 @@ public class RoomDaoImpl implements RoomDao {
         List<Room> list = query.list();
         return list;
     }
+
+    @Override
+    public int getRoomCount(Session session) {
+        String hql = "FROM room";
+        Query query = session.createQuery(hql);
+        List list = query.list();
+        return list.size();
+    }
 }

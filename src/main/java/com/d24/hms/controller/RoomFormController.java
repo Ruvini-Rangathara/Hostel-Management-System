@@ -124,17 +124,21 @@ public class RoomFormController implements Initializable {
 
     public void btnEditOnAction(ActionEvent actionEvent) throws IOException {
 
-        URL resource = this.getClass().getResource("/view/popupWindows/popup_room_edit_form.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(resource);
-        Parent load = fxmlLoader.load();
-        PopupRoomEditFormController controller = fxmlLoader.getController();
-        controller.init(tblRoom.getSelectionModel().getSelectedItem(), this);
-        Stage stage = new Stage();
-        stage.setTitle("Update/Delete Room Details");
-        stage.setScene(new Scene(load));
-        stage.centerOnScreen();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+        if(tblRoom.getSelectionModel().getSelectedItem()!=null){
+
+            URL resource = this.getClass().getResource("/view/popupWindows/popup_room_edit_form.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(resource);
+            Parent load = fxmlLoader.load();
+            PopupRoomEditFormController controller = fxmlLoader.getController();
+            controller.init(tblRoom.getSelectionModel().getSelectedItem(), this);
+            Stage stage = new Stage();
+            stage.setTitle("Update/Delete Room Details");
+            stage.setScene(new Scene(load));
+            stage.centerOnScreen();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        }
+
     }
 
     public void btnRefreshOnAction(ActionEvent actionEvent) throws IOException {

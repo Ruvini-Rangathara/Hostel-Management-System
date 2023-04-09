@@ -1,6 +1,7 @@
 package com.d24.hms.controller;
 
 import com.d24.hms.controller.popupWindows.PopupReservationEditFormController;
+import com.d24.hms.dto.ReservationDto;
 import com.d24.hms.service.ServiceFactory;
 import com.d24.hms.service.ServiceType;
 import com.d24.hms.service.custom.ReservationService;
@@ -91,10 +92,11 @@ public class ReservationFormController implements Initializable {
         tblReservation.getColumns().get(0).setCellValueFactory(new PropertyValueFactory("res_id"));
         tblReservation.getColumns().get(1).setCellValueFactory(new PropertyValueFactory("date"));
         tblReservation.getColumns().get(2).setCellValueFactory(new PropertyValueFactory("student_id"));
-        tblReservation.getColumns().get(3).setCellValueFactory(new PropertyValueFactory("room_type_id"));
-        tblReservation.getColumns().get(4).setCellValueFactory(new PropertyValueFactory("status"));
+        tblReservation.getColumns().get(3).setCellValueFactory(new PropertyValueFactory("student_name"));
+        tblReservation.getColumns().get(4).setCellValueFactory(new PropertyValueFactory("room_type_id"));
+        tblReservation.getColumns().get(5).setCellValueFactory(new PropertyValueFactory("status"));
 
-        List<ReservationTM> reservationTMList = reservationService.getAll().stream().map(reservation -> new ReservationTM(reservation.getRes_id(), reservation.getDate(), reservation.getStudentDto().getStudent_id(), reservation.getRoomDto().getRoom_type_id(),reservation.getStatus())).collect(Collectors.toList());
+        List<ReservationTM> reservationTMList = reservationService.getAll().stream().map(reservation ->toTm(reservation)).collect(Collectors.toList());
 
         ObservableList<ReservationTM> reservationTMS = FXCollections.observableArrayList(reservationTMList);
         tblReservation.setItems(reservationTMS);
@@ -102,7 +104,7 @@ public class ReservationFormController implements Initializable {
 
         txtSearchBar.textProperty().addListener((observableValue, pre, curr) -> {
             if (!Objects.equals(pre, curr)) {
-                List<ReservationTM> searchResult = reservationService.reservationSearchByText(curr).stream().map(reservation -> new ReservationTM(reservation.getRes_id(), reservation.getDate(),  reservation.getStudentDto().getStudent_id(), reservation.getRoomDto().getRoom_type_id(),reservation.getStatus())).collect(Collectors.toList());
+                List<ReservationTM> searchResult = reservationService.reservationSearchByText(curr).stream().map(reservation -> new ReservationTM(reservation.getRes_id(), reservation.getDate(),  reservation.getStudentDto().getStudent_id(),studentService.search(reservation.getStudentDto().getStudent_id()).getName(), reservation.getRoomDto().getRoom_type_id(),reservation.getStatus())).collect(Collectors.toList());
                 if (searchResult != null) {
                     tblReservation.getItems().clear();
                     tblReservation.setItems(FXCollections.observableArrayList(searchResult));
@@ -110,6 +112,10 @@ public class ReservationFormController implements Initializable {
             }
 
         });
+    }
+
+    private ReservationTM toTm(ReservationDto reservation) {
+        return  new ReservationTM(reservation.getRes_id(), reservation.getDate(), reservation.getStudentDto().getStudent_id(),studentService.search(reservation.getStudentDto().getStudent_id()).getName(), reservation.getRoomDto().getRoom_type_id(),reservation.getStatus());
     }
 
     @FXML
@@ -127,17 +133,20 @@ public class ReservationFormController implements Initializable {
 
     @FXML
     void btnEditOnAction(ActionEvent event) throws IOException {
-        URL resource = this.getClass().getResource("/view/popupWindows/popup_reservation_edit_form.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(resource);
-        Parent load = fxmlLoader.load();
-        PopupReservationEditFormController controller = fxmlLoader.getController();
-        //controller.init(tblReservation.getSelectionModel().getSelectedItem(), this);
-        Stage stage = new Stage();
-        stage.setTitle("Update/Delete Reservation Details");
-        stage.setScene(new Scene(load));
-        stage.centerOnScreen();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+
+        if(tblReservation.getSelectionModel().getSelectedItem()!=null){
+            URL resource = this.getClass().getResource("/view/popupWindows/popup_reservation_edit_form.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(resource);
+            Parent load = fxmlLoader.load();
+            PopupReservationEditFormController controller = fxmlLoader.getController();
+            controller.init(tblReservation.getSelectionModel().getSelectedItem(), this);
+            Stage stage = new Stage();
+            stage.setTitle("Update/Delete Reservation Details");
+            stage.setScene(new Scene(load));
+            stage.centerOnScreen();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        }
     }
 
     @FXML
@@ -155,4 +164,6 @@ public class ReservationFormController implements Initializable {
         lblRefresh.setVisible(true);
     }
 
+    public void txtSearchBarOnAction(ActionEvent actionEvent) {
+    }
 }

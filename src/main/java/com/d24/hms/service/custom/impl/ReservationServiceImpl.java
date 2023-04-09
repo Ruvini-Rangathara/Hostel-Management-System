@@ -32,14 +32,17 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public boolean save(ReservationDto reservationDto) {
+
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
+
         try{
             reservationDao.save(convertor.toReservation(reservationDto),session);
 
             transaction.commit();
             return true;
         }catch(Exception e){
+            System.out.println(e);
             transaction.rollback();
             return false;
         }finally {
@@ -154,5 +157,29 @@ public class ReservationServiceImpl implements ReservationService {
         }finally {
             session.close();
         }
+    }
+
+    @Override
+    public List<ReservationDto> getNotPaidKeyMoney() {
+            Session session = FactoryConfiguration.getInstance().getSession();
+            Transaction transaction = session.beginTransaction();
+            try{
+                List<Reservation> reservations = reservationDao.getNotPaidKeyMoney(session);
+                List<ReservationDto> reservationDtoList = new ArrayList<>();
+
+                for(Reservation reservation : reservations){
+                    ReservationDto reservationDto = convertor.toReservationDto(reservation);
+                    System.out.println(reservationDto);
+                    reservationDtoList.add(reservationDto);
+                }
+
+                transaction.commit();
+                return reservationDtoList;
+            }catch(Exception e){
+                transaction.rollback();
+                return null;
+            }finally {
+                session.close();
+            }
     }
 }

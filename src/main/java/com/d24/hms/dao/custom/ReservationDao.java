@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface ReservationDao extends CrudDao<Reservation,String> {
     public List<Reservation> reservationSearchByText(String text, Session session);
+    List<Reservation> getNotPaidKeyMoney(Session session);
 }

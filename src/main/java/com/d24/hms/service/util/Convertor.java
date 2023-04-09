@@ -58,6 +58,7 @@ public class Convertor {
         reservation.setDate(reservationDto.getDate());
         reservation.setStudent(toStudent(reservationDto.getStudentDto()));
         reservation.setRoom(toRoom(reservationDto.getRoomDto()));
+        reservation.setStatus(reservationDto.getStatus());
         return reservation;
     }
 
@@ -67,6 +68,7 @@ public class Convertor {
         reservationDto.setDate(reservation.getDate());
         reservationDto.setStudentDto(toStudentDto(reservation.getStudent()));
         reservationDto.setRoomDto(toRoomDto(reservation.getRoom()));
+        reservationDto.setStatus(reservation.getStatus());
         return reservationDto;
 
     }

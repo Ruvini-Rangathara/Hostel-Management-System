@@ -17,6 +17,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
@@ -58,7 +60,7 @@ public class LoginFormController implements Initializable {
     private Label lblPasswordHint;
 
     private UserService userService;
-    private List<UserDto> userList ;
+    private List<UserDto> userList;
 
 
     @Override
@@ -81,11 +83,15 @@ public class LoginFormController implements Initializable {
 
     @FXML
     void btnForgetPasswordOnAction(ActionEvent event) throws IOException {
-        for(UserDto userDto : userList){
-            if(userDto.getUsername()==txtUsername.getText()){
-                lblPasswordHint.setText(userDto.getPasswordHint());
-            }
-        }
+        UserDto userDto = userService.search(txtUsername.getText());
+        lblPasswordHintLabel.setText(userDto.getPasswordHint());
+        lblPasswordHintLabel.setVisible(true);
+
+//        for(UserDto userDto : userList){
+//            if(userDto.getUsername().equals(txtUsername.getText())){
+//                lblPasswordHint.setText(userDto.getPasswordHint());
+//            }
+//        }
     }
 
     @FXML
@@ -94,13 +100,22 @@ public class LoginFormController implements Initializable {
     }
 
     private void loginMethod() throws IOException {
+        UserDto userDto1 = null;
         for(UserDto userDto : userList){
-            if(userDto.getUsername()==txtUsername.getText()){
-                if(userDto.getPassword()==txtPassword.getText()){
-                    Navigation.navigate(Routes.DASHBOARD_FORM,pane);
-                }else{lblInvalidPassword.setVisible(true);}
-            }else{lblInvalidUsername.setVisible(true);}
+            if(userDto.getUsername().equals(txtUsername.getText())){
+                userDto1=userService.search(txtUsername.getText());
+                break;
+            }
         }
+
+        if(userDto1==null){
+            lblInvalidUsername.setVisible(true);
+        }else{
+            if(userDto1.getPassword().equals(txtPassword.getText())){
+                Navigation.navigate(Routes.DASHBOARD_FORM,pane);
+            }else{lblInvalidPassword.setVisible(true);}
+        }
+
 
     }
 
@@ -115,7 +130,26 @@ public class LoginFormController implements Initializable {
     }
 
     public void rbtnShowPasswordOnAction(ActionEvent actionEvent) {
+        if(rbtnShowPassword.isSelected()){
+            lblShowPassword.setText(txtPassword.getText());
+            lblShowPassword.setVisible(true);
+        }else{
+            lblShowPassword.setVisible(false);
+        }
+
+    }
+
+    public void txtPasswordOnMouseClicked(MouseEvent mouseEvent) {
+        lblInvalidPassword.setVisible(false);
+        lblInvalidUsername.setVisible(false);
+    }
+
+    public void txtUsernameOnMouseClicked(MouseEvent mouseEvent) {
+        lblInvalidPassword.setVisible(false);
+        lblInvalidUsername.setVisible(false);
+    }
+
+    public void txtPasswordOnKeyTyped(KeyEvent keyEvent) {
         lblShowPassword.setText(txtPassword.getText());
-        lblShowPassword.setVisible(true);
     }
 }

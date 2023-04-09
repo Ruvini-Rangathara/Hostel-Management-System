@@ -77,6 +77,8 @@ public class StudentFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        lblRefresh.setVisible(false);
+
         studentService= ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
 
         tblStudent.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("student_id"));
@@ -121,17 +123,21 @@ public class StudentFormController implements Initializable {
 
     @FXML
     void btnEditOnAction(ActionEvent event) throws IOException {
-        URL resource = this.getClass().getResource("/view/popupWindows/popup_student_edit_form.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(resource);
-        Parent load = fxmlLoader.load();
-        PopupStudentEditFormController controller = fxmlLoader.getController();
-        controller.init(tblStudent.getSelectionModel().getSelectedItem(),this);
-        Stage stage = new Stage();
-        stage.setTitle("Update/Delete Student Details");
-        stage.setScene(new Scene(load));
-        stage.centerOnScreen();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+
+        if(tblStudent.getSelectionModel().getSelectedItem()!=null){
+            URL resource = this.getClass().getResource("/view/popupWindows/popup_student_edit_form.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(resource);
+            Parent load = fxmlLoader.load();
+            PopupStudentEditFormController controller = fxmlLoader.getController();
+            controller.init(tblStudent.getSelectionModel().getSelectedItem(),this);
+            Stage stage = new Stage();
+            stage.setTitle("Update/Delete Student Details");
+            stage.setScene(new Scene(load));
+            stage.centerOnScreen();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        }
+
     }
 
     @FXML
@@ -145,7 +151,7 @@ public class StudentFormController implements Initializable {
     }
 
     public void btnRefreshOnAction(ActionEvent actionEvent) throws IOException {
-        Navigation.navigate(Routes.ROOM_FORM,pane2);
+        Navigation.navigate(Routes.STUDENT_FORM,pane2);
     }
 
     public void btnRefreshOnMouseExited(MouseEvent mouseEvent) {

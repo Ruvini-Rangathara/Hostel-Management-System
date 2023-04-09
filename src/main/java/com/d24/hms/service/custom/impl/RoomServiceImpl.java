@@ -158,4 +158,21 @@ public class RoomServiceImpl implements RoomService {
             session.close();
         }
     }
+
+    @Override
+    public int getRoomCount() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            int roomCount = roomDao.getRoomCount(session);
+            System.out.println("service room count  "+roomCount);
+            transaction.commit();
+            return roomCount;
+        }catch(Exception e){
+            transaction.rollback();
+            return 0;
+        }finally {
+            session.close();
+        }
+    }
 }

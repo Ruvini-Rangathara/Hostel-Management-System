@@ -79,6 +79,7 @@ public class PopupStudentSaveFormController implements Initializable {
         studentDto.setStudent_id(lblStudentId.getText());
         studentDto.setName(txtName.getText());
         studentDto.setName(txtName.getText());
+        studentDto.setAddress(txtAddress.getText());
         studentDto.setContact(txtContactNo.getText());
         studentDto.setDate(dteDate.getValue());
         studentDto.setGender(String.valueOf(cmbGender.getValue()));

@@ -56,4 +56,12 @@ public class StudentDaoImpl implements StudentDao {
         List<Student> list = query.list();
         return list;
     }
+
+    @Override
+    public int getStudentCount(Session session) {
+        String hql = "FROM student ";
+        Query query = session.createQuery(hql);
+        List list = query.list();
+        return list.size();
+    }
 }

@@ -23,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -100,7 +101,7 @@ public class PopupReservationEditFormController implements Initializable {
     private ReservationDto getReservationDto() {
         LocalDate date;
         if(dteDate.getValue()==null){
-            date= LocalDate.parse(dteDate.getPromptText());
+            date =reservationService.search(lblReservationId.getText()).getDate();
         }else{
             date=dteDate.getValue();
         }

@@ -32,10 +32,11 @@ public class UserServiceImpl implements UserService {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try{
-            boolean isSave = userDao.update(convertor.toUser(userDto), session);
+            userDao.update(convertor.toUser(userDto), session);
             transaction.commit();
             return true;
         }catch(Exception e){
+            System.out.println("user service impl : "+e);
             transaction.rollback();
             return false;
         }finally {

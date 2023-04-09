@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface StudentDao extends CrudDao<Student,String> {
     List<Student> studentSearchByText(String text, Session session);
+    int getStudentCount(Session session);
 }

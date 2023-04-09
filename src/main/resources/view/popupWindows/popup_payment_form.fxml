@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="650.0" style="-fx-background-color: #4E6E81;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.d24.hms.controller.popupWindows.PopupPaymentFormController">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="650.0" opacity="0.6" pickOnBounds="true">
+         <image>
+            <Image url="@../../asset/image/bg1.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblReservation" focusTraversable="false" layoutX="24.0" layoutY="119.0" prefHeight="310.0" prefWidth="604.0">
+         <columns>
+            <TableColumn fx:id="colReservationId" prefWidth="88.0" text="Reservation ID" />
+            <TableColumn fx:id="colDate" prefWidth="109.0" text="Date" />
+            <TableColumn fx:id="colStudentId" prefWidth="81.0" text="Student ID" />
+            <TableColumn fx:id="colName" prefWidth="238.0" text="Name" />
+            <TableColumn fx:id="colRoomTypeId" prefWidth="87.0" text="Room Type ID" />
+         </columns>
+      </TableView>
+      <Label layoutX="155.0" layoutY="37.0" text="Key Money Not Payments" textFill="#101579">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -151,4 +151,20 @@ public class StudentServiceImpl implements StudentService {
             session.close();
         }
     }
+
+    @Override
+    public int getStudentCount() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try{
+            int studentCount = studentDao.getStudentCount(session);
+            transaction.commit();
+            return studentCount;
+        }catch(Exception e){
+            transaction.rollback();
+            return 0;
+        }finally {
+            session.close();
+        }
+    }
 }
