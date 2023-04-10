@@ -5,6 +5,7 @@ import com.d24.hms.service.ServiceFactory;
 import com.d24.hms.service.ServiceType;
 import com.d24.hms.service.custom.RoomService;
 import com.d24.hms.util.Navigation;
+import com.d24.hms.util.RegExPattern;
 import com.d24.hms.util.Routes;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
@@ -64,19 +65,36 @@ public class PopupRoomSaveFormController implements Initializable {
     @FXML
     void btnSaveOnAction(ActionEvent event) throws IOException {
 
-        RoomDto roomDto = new RoomDto();
+        boolean isKeyMoneyMatched = RegExPattern.getSalaryPattern().matcher(txtKeyMoney.getText()).matches();
+        boolean isCapacityMatched = RegExPattern.getSalaryPattern().matcher(txtQty.getText()).matches();
 
-        roomDto.setRoom_type_id(lblRoomTypeId.getText());
-        roomDto.setType(txtRoomType.getText());
-        roomDto.setKey_money(Double.parseDouble(txtKeyMoney.getText()));
-        roomDto.setQty(Integer.parseInt(txtQty.getText()));
 
-        if (roomService.save(roomDto)) {
-            Optional<ButtonType> choose = new Alert(Alert.AlertType.CONFIRMATION, "Room Added Successfully!", ButtonType.OK, ButtonType.CANCEL).showAndWait();
-            if (choose.get() == ButtonType.OK) {
-                Navigation.navigate(Routes.POPUP_ROOM_SAVE_FORM, pane);
+        if(isKeyMoneyMatched){
+            if(isCapacityMatched){
+
+                RoomDto roomDto = new RoomDto();
+
+                roomDto.setRoom_type_id(lblRoomTypeId.getText());
+                roomDto.setType(txtRoomType.getText());
+                roomDto.setKey_money(Double.parseDouble(txtKeyMoney.getText()));
+                roomDto.setQty(Integer.parseInt(txtQty.getText()));
+
+                if (roomService.save(roomDto)) {
+                    Optional<ButtonType> choose = new Alert(Alert.AlertType.CONFIRMATION, "Room Added Successfully!", ButtonType.OK, ButtonType.CANCEL).showAndWait();
+                    if (choose.get() == ButtonType.OK) {
+                        Navigation.navigate(Routes.POPUP_ROOM_SAVE_FORM, pane);
+                    }
+                }
+
+            }else{
+                txtQty.setStyle("-fx-border-color: red; -fx-border-width: 1px");
+                txtQty.requestFocus();
             }
+        }else{
+            txtKeyMoney.setStyle("-fx-border-color: red; -fx-border-width: 1px");
+            txtKeyMoney.requestFocus();
         }
+
     }
 
     @FXML

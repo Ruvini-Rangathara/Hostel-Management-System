@@ -59,7 +59,7 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public List<Reservation> getNotPaidKeyMoney(Session session) {
-        String hql = "FROM reservation WHERE status='NotPaid'";
+        String hql = "FROM reservation WHERE status='Not Paid'";
         Query query = session.createQuery(hql);
         List<Reservation> list = query.list();
         return list;

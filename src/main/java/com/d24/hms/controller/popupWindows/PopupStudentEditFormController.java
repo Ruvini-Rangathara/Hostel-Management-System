@@ -7,6 +7,7 @@ import com.d24.hms.service.ServiceType;
 import com.d24.hms.service.custom.StudentService;
 import com.d24.hms.tm.StudentTM;
 import com.d24.hms.util.Navigation;
+import com.d24.hms.util.RegExPattern;
 import com.d24.hms.util.Routes;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
@@ -116,12 +117,30 @@ public class PopupStudentEditFormController implements Initializable {
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws IOException {
 
-        if (studentService.update(getStudentDto())){
-            new Alert(Alert.AlertType.CONFIRMATION,"Updated!").show();
-            Navigation.navigate(Routes.POPUP_STUDENT_EDIT_FORM,pane);
+        boolean isMatchedName = RegExPattern.getNamePattern().matcher(txtName.getText()).matches();
+        boolean isMatchedContact = RegExPattern.getMobilePattern().matcher(txtContactNo.getText()).matches();
+
+
+        if(isMatchedName){
+            if(isMatchedContact){
+
+                if (studentService.update(getStudentDto())){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Updated!").show();
+                    Navigation.navigate(Routes.POPUP_STUDENT_EDIT_FORM,pane);
+                }else{
+                    new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
+                }
+
+
+            }else {
+                txtContactNo.setStyle("-fx-border-color: red; -fx-border-width: 1px");
+                txtContactNo.requestFocus();
+            }
         }else{
-            new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
+            txtName.setStyle("-fx-border-color: red; -fx-border-width: 1px");
+            txtName.requestFocus();
         }
+
     }
 
     @FXML

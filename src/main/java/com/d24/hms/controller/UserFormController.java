@@ -12,9 +12,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
 
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -54,6 +59,8 @@ public class UserFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        btnCreate.setVisible(true);
+
         lblAdminPasswordHint.setVisible(false);
         pane.setDisable(true);
         txtUsername.setDisable(true);
@@ -79,10 +86,7 @@ public class UserFormController implements Initializable {
 
     @FXML
     void btnCreateOnAction(ActionEvent event) throws IOException {
-
-        boolean isUsernameMatched = RegExPattern.getUsernamePattern().matcher(txtUsername.getText()).matches();
-        boolean isPasswordMatched = RegExPattern.getPasswordPattern().matcher(txtPassword.getText()).matches();
-        boolean isPasswordHintMatched = RegExPattern.getPasswordPattern().matcher(txtPasswordHint.getText()).matches();
+        
 
         UserDto userDto = getUserDto();
         System.out.println(userDto);
@@ -111,12 +115,36 @@ public class UserFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws IOException {
-        if (userService.update(getUserDto())) {
-            new Alert(Alert.AlertType.CONFIRMATION, "Updated!").show();
-            Navigation.navigate(Routes.USER_FORM, pane1);
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
+
+        boolean isUsernameMatched = RegExPattern.getUsernamePattern().matcher(txtUsername.getText()).matches();
+        boolean isPasswordMatched = RegExPattern.getPasswordPattern().matcher(txtPassword.getText()).matches();
+        boolean isPasswordHintMatched = RegExPattern.getPasswordPattern().matcher(txtPasswordHint.getText()).matches();
+
+
+        if(isUsernameMatched){
+            if(isPasswordMatched){
+                if(isPasswordHintMatched){
+
+                    if (userService.update(getUserDto())) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Updated!").show();
+                        Navigation.navigate(Routes.USER_FORM, pane1);
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
+                    }
+
+                }else{
+                    txtPasswordHint.setStyle("-fx-border-color: red; -fx-border-width: 1px");
+                    txtPasswordHint.requestFocus();
+                }
+            }else{
+                txtPassword.setStyle("-fx-border-color: red; -fx-border-width: 1px");
+                txtPassword.requestFocus();
+            }
+        }else{
+            txtUsername.setStyle("-fx-border-color: red; -fx-border-width: 1px");
+            txtUsername.requestFocus();
         }
+
     }
 
     @FXML

@@ -7,6 +7,7 @@ import com.d24.hms.service.ServiceType;
 import com.d24.hms.service.custom.RoomService;
 import com.d24.hms.tm.RoomTM;
 import com.d24.hms.util.Navigation;
+import com.d24.hms.util.RegExPattern;
 import com.d24.hms.util.Routes;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
@@ -96,12 +97,30 @@ public class PopupRoomEditFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws IOException {
-        if (roomService.update(getRoomDto())) {
-            new Alert(Alert.AlertType.CONFIRMATION, "Updated!").show();
-            Navigation.navigate(Routes.POPUP_ROOM_EDIT_FORM, pane);
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
+        boolean isKeyMoneyMatched = RegExPattern.getSalaryPattern().matcher(txtKeyMoney.getText()).matches();
+        boolean isCapacityMatched = RegExPattern.getSalaryPattern().matcher(txtQty.getText()).matches();
+
+
+        if(isKeyMoneyMatched){
+            if(isCapacityMatched){
+
+
+                if (roomService.update(getRoomDto())) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Updated!").show();
+                    Navigation.navigate(Routes.POPUP_ROOM_EDIT_FORM, pane);
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
+                }
+
+            }else{
+                txtQty.setStyle("-fx-border-color: red; -fx-border-width: 1px");
+                txtQty.requestFocus();
+            }
+        }else{
+            txtKeyMoney.setStyle("-fx-border-color: red; -fx-border-width: 1px");
+            txtKeyMoney.requestFocus();
         }
+
     }
 
     @FXML

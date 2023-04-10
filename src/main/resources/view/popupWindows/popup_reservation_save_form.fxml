@@ -101,7 +101,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtStatus" focusTraversable="false" layoutX="190.0" layoutY="410.0" prefHeight="25.0" prefWidth="312.0" promptText="Paid/Non Paid">
+      <TextField fx:id="txtStatus" focusTraversable="false" layoutX="190.0" layoutY="410.0" prefHeight="25.0" prefWidth="312.0" promptText="Paid/Not Paid">
          <font>
             <Font size="14.0" />
          </font>

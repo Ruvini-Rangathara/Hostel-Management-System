@@ -5,6 +5,7 @@ import com.d24.hms.service.ServiceFactory;
 import com.d24.hms.service.ServiceType;
 import com.d24.hms.service.custom.StudentService;
 import com.d24.hms.util.Navigation;
+import com.d24.hms.util.RegExPattern;
 import com.d24.hms.util.Routes;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
@@ -73,24 +74,41 @@ public class PopupStudentSaveFormController implements Initializable {
 
     @FXML
     void btnRegisterOnAction(ActionEvent event) throws IOException {
-        StudentService studentService = ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
-        StudentDto studentDto = new StudentDto();
 
-        studentDto.setStudent_id(lblStudentId.getText());
-        studentDto.setName(txtName.getText());
-        studentDto.setName(txtName.getText());
-        studentDto.setAddress(txtAddress.getText());
-        studentDto.setContact(txtContactNo.getText());
-        studentDto.setDate(dteDate.getValue());
-        studentDto.setGender(String.valueOf(cmbGender.getValue()));
+        boolean isMatchedName = RegExPattern.getNamePattern().matcher(txtName.getText()).matches();
+        boolean isMatchedContact = RegExPattern.getMobilePattern().matcher(txtContactNo.getText()).matches();
 
-        if (studentService.save(studentDto)) {
-            Optional<ButtonType> choose = new Alert(Alert.AlertType.CONFIRMATION, "Student Added Successfully!", ButtonType.OK, ButtonType.CANCEL).showAndWait();
-            if (choose.get() == ButtonType.OK) {
-                Navigation.navigate(Routes.POPUP_STUDENT_SAVE_FORM, pane);
+
+        if(isMatchedName){
+            if(isMatchedContact){
+
+                StudentService studentService = ServiceFactory.getInstance().getService(ServiceType.STUDENT_SERVICE);
+                StudentDto studentDto = new StudentDto();
+
+                studentDto.setStudent_id(lblStudentId.getText());
+                studentDto.setName(txtName.getText());
+                studentDto.setName(txtName.getText());
+                studentDto.setAddress(txtAddress.getText());
+                studentDto.setContact(txtContactNo.getText());
+                studentDto.setDate(dteDate.getValue());
+                studentDto.setGender(String.valueOf(cmbGender.getValue()));
+
+                if (studentService.save(studentDto)) {
+                    Optional<ButtonType> choose = new Alert(Alert.AlertType.CONFIRMATION, "Student Added Successfully!", ButtonType.OK, ButtonType.CANCEL).showAndWait();
+                    if (choose.get() == ButtonType.OK) {
+                        Navigation.navigate(Routes.POPUP_STUDENT_SAVE_FORM, pane);
+                    }
+                }
+
+
+            }else {
+                txtContactNo.setStyle("-fx-border-color: red; -fx-border-width: 1px");
+                txtContactNo.requestFocus();
             }
+        }else{
+            txtName.setStyle("-fx-border-color: red; -fx-border-width: 1px");
+            txtName.requestFocus();
         }
-
 
     }
 
